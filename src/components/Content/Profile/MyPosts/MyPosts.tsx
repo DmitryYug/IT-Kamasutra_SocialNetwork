@@ -1,18 +1,44 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
+import {ProfilePagePropsType} from "../../../../redux/state";
 
-export function MyPosts () {
+
+
+//Components
+const PostAddForm = () => {
     return (
         <>
-            <div className={classes.item}>
-                my posts
+            <h2 className={classes.item}>
+                My posts
+            </h2>
+            <div>
+                <textarea placeholder='new post'></textarea>
             </div>
-            <input type="new post"/>
-            <button>Add post</button>
-            <Post message='first post' likes={4}/>
-            <Post message='second post' likes={100}/>
-            <Post message='surprise mtf' likes={7}/>
+            <div>
+                <button className={classes.addPostBtn}>Add post</button>
+            </div>
         </>
+    )
+}
+
+export function MyPosts(props: ProfilePagePropsType) {
+
+    //Rendered Items
+    const postItems = props.posts.map(p => {
+        return (
+            <Post
+                message={p.message}
+                likes={p.likes}/>
+        )
+    })
+
+    return (
+        <div className={classes.postAreaWrapper}>
+            <PostAddForm/>
+            <div>
+                {postItems}
+            </div>
+        </div>
     )
 }

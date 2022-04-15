@@ -1,3 +1,7 @@
 .item {
     color: green;
+    padding: 10px;
+}
+.postAreaWrapper {
+    padding: 10px;
 }
