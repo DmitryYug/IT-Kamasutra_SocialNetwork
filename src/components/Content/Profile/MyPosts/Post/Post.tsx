@@ -1,17 +1,28 @@
 import React from "react";
 import classes from "./Post.module.css";
-import  {PostPropsType} from "../../../../../redux/state";
+import  {PostItemType} from "../../../../../redux/state";
 
-//Components
-const Avatar = () => {
+export function Post (props: PostItemType) {
+    return (
+        <div className={classes.postItemWrapper}>
+            <Avatar/>
+            <PostItem
+                message={props.message}
+                likes={props.likes}
+            />
+        </div>
+    )
+}
+
+//Local components
+    const Avatar = () => {
     return (
         <div className={classes.item}>
             <img src="https://byuc.files.wordpress.com/2012/07/avat-2.jpg"/>
         </div>
     )
 }
-
-const PostItem = (props: any) => {
+    const PostItem = (props: any) => {
     return (
         <div>
             <div>
@@ -24,14 +35,4 @@ const PostItem = (props: any) => {
 )
 }
 
-export function Post (props: PostPropsType) {
-    return (
-        <div className={classes.postItemWrapper}>
-            <Avatar/>
-            <PostItem
-                message={props.message}
-                likes={props.likes}
-            />
-        </div>
-    )
-}
+

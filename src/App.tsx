@@ -8,10 +8,17 @@ import {Settings} from "./components/Content/Settings/Settings";
 import {Music} from "./components/Content/Music/Music";
 import {News} from "./components/Content/News/News";
 import {BrowserRouter, Route} from "react-router-dom";
-import {RootsStateType} from "./redux/state";
-// import state from "./redux/state";
+import {addPost, changeNewPostText, RootsStateType} from "./redux/state";
 
-function App(props: RootsStateType) {
+
+type AppPropsType = {
+    appState: RootsStateType
+}
+
+function App (props: AppPropsType) {
+
+    const {dialogs, messages} = props.appState.dialogsPage
+    const {posts, newPostTitle} = props.appState.profilePage
 
     return (
         <BrowserRouter>
@@ -21,15 +28,20 @@ function App(props: RootsStateType) {
                 <div className="app-wrapper-content">
                     <Route
                         path='/profile'
-                        render={() => <Profile
-                            posts={props.profilePage.posts}
+                        render={ () =>
+                            <Profile
+                                newPostTitle={newPostTitle}
+                                addPost={addPost}
+                                changeNewPostText={changeNewPostText}
+                                posts={posts}
                         />}
                     />
                     <Route
                         path='/dialogs'
-                        render={ () => <Dialogs
-                                dialogs={props.dialogsPage.dialogs}
-                                messages={props.dialogsPage.messages}
+                        render={ () =>
+                            <Dialogs
+                                dialogs={dialogs}
+                                messages={messages}
 
                         />}
                     />

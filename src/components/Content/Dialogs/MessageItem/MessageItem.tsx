@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "../Dialogs.module.css";
-import {PropsMessageItemType} from "../../../../redux/state";
+import {MessageItemType} from "../../../../redux/state";
 
 
-export function MessageItem (props: PropsMessageItemType) {
+export function MessageItem (props: MessageItemType) {
     return (
         <div className={classes.messages_item + ' ' + classes.active}>
             {props.message}
