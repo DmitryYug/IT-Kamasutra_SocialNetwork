@@ -8,17 +8,19 @@ import {Settings} from "./components/Content/Settings/Settings";
 import {Music} from "./components/Content/Music/Music";
 import {News} from "./components/Content/News/News";
 import {BrowserRouter, Route} from "react-router-dom";
-import {addPost, changeNewPostText, RootsStateType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 
 type AppPropsType = {
-    appState: RootsStateType
+    store: StoreType
 }
 
-function App (props: AppPropsType) {
+function App(props: AppPropsType) {
 
-    const {dialogs, messages} = props.appState.dialogsPage
-    const {posts, newPostTitle} = props.appState.profilePage
+    const {dialogs, messages, newMessageText} = props.store._state.dialogsPage
+    const {posts, newPostText} = props.store._state.profilePage
+    const {addPost, addNewMessage, changeNewPostText, changeNewMessageText} = props.store
+    console.log(props.store._state)
 
     return (
         <BrowserRouter>
@@ -28,22 +30,24 @@ function App (props: AppPropsType) {
                 <div className="app-wrapper-content">
                     <Route
                         path='/profile'
-                        render={ () =>
+                        render={() =>
                             <Profile
-                                newPostTitle={newPostTitle}
-                                addPost={addPost}
-                                changeNewPostText={changeNewPostText}
+                                newPostTitle={newPostText}
+                                addPost={addPost.bind(props.store)}
+                                changeNewPostText={changeNewPostText.bind(props.store)}
                                 posts={posts}
-                        />}
+                            />}
                     />
                     <Route
                         path='/dialogs'
-                        render={ () =>
+                        render={() =>
                             <Dialogs
+                                newMessageText={newMessageText}
                                 dialogs={dialogs}
                                 messages={messages}
-
-                        />}
+                                changeNewMessageText={changeNewMessageText.bind(props.store)}
+                                addNewMessage={addNewMessage.bind(props.store)}
+                            />}
                     />
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>

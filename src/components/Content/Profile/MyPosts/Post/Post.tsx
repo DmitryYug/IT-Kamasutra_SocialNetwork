@@ -32,7 +32,7 @@ export function Post (props: PostItemType) {
                 {props.likes} people liked it
             </div>
         </div>
-)
+    )
 }
 
 
