@@ -7,8 +7,8 @@ import {Dialogs} from "./components/Content/Dialogs/Dialogs";
 import {Settings} from "./components/Content/Settings/Settings";
 import {Music} from "./components/Content/Music/Music";
 import {News} from "./components/Content/News/News";
-import {BrowserRouter, Route} from "react-router-dom";
-import {RootsStateType, StoreType} from "./redux/state";
+import {Route} from "react-router-dom";
+import {StoreType} from "./redux/state";
 
 
 type AppPropsType = {
@@ -19,8 +19,7 @@ function App(props: AppPropsType) {
 
     const {dialogs, messages, newMessageText} = props.store.getState().dialogsPage
     const {posts, newPostText} = props.store.getState().profilePage
-    const {addPost, addNewMessage, changeNewPostText, changeNewMessageText} = props.store
-
+    const {dispatch} = props.store
 
     return (
         <div className="app-wrapper">
@@ -32,8 +31,7 @@ function App(props: AppPropsType) {
                     render={() =>
                         <Profile
                             newPostTitle={newPostText}
-                            addPost={addPost.bind(props.store)}
-                            changeNewPostText={changeNewPostText.bind(props.store)}
+                            dispatch={dispatch.bind(props.store)}
                             posts={posts}
                         />}
                 />
@@ -44,8 +42,7 @@ function App(props: AppPropsType) {
                             newMessageText={newMessageText}
                             dialogs={dialogs}
                             messages={messages}
-                            changeNewMessageText={changeNewMessageText.bind(props.store)}
-                            addNewMessage={addNewMessage.bind(props.store)}
+                            dispatch={dispatch.bind(props.store)}
                         />}
                 />
                 <Route path='/news' component={News}/>

@@ -12,8 +12,10 @@ type DialogsPropsType = {
     newMessageText: string
     dialogs: Array<DialogItemType>
     messages: Array<MessageItemType>
-    changeNewMessageText: (newMessageValue: string) => void
-    addNewMessage: (newMessageValue: string) => void
+    // changeNewMessageText: (newMessageValue: string) => void
+    // addNewMessage: (newMessageValue: string) => void
+    dispatch: (action: any) => void
+
 }
 
 
@@ -46,8 +48,10 @@ export function Dialogs(props: DialogsPropsType) {
             <div>
                 <NewMessage
                     newMessageText={props.newMessageText}
-                    changeNewMessageText={props.changeNewMessageText}
-                    addNewMessage={props.addNewMessage}
+                    dispatch={props.dispatch}
+
+                    // changeNewMessageText={props.changeNewMessageText}
+                    // addNewMessage={props.addNewMessage}
                 />
             </div>
         </div>
@@ -57,8 +61,10 @@ export function Dialogs(props: DialogsPropsType) {
 //Local components
     type NewMessagePropsType = {
         newMessageText: string
-        changeNewMessageText: (newMessageValue: string) => void
-        addNewMessage: (newMessageValue: string) => void
+        // changeNewMessageText: (newMessageValue: string) => void
+        // addNewMessage: (newMessageValue: string) => void
+        dispatch: (action: any) => void
+
     }
 
     const NewMessage: React.FC<NewMessagePropsType> = (props) => {
@@ -66,13 +72,16 @@ export function Dialogs(props: DialogsPropsType) {
         let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
         const addMessageOnClickHandler = () => {
-            props.addNewMessage(props.newMessageText)
-            console.log(props.newMessageText)
-            console.log('ok')
+            props.dispatch({type: "ADD-NEW-MESSAGE"})
+            // props.addNewMessage(props.newMessageText)
+            // console.log(props.newMessageText)
+            // console.log('ok')
         }
         const addMessageOnChangeHandler = () => {
             let newMessageValue = newMessageElement.current?.value
-            props.changeNewMessageText(newMessageValue)
+            props.dispatch({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessageValue})
+            // props.changeNewMessageText(newMessageValue)
+
         }
 
         return(

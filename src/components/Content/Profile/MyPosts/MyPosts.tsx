@@ -6,12 +6,11 @@ import {PostItemType} from "../../../../redux/state";
 
 type ProfilePagePropsType = {
     newPostTitle: string
-    addPost: (newPostTitle: string) => void
-    changeNewPostText: (newPostValue: string) => void
     posts: Array<PostItemType>
+    dispatch: (action: any) => void
 }
 export const MyPosts:React.FC<ProfilePagePropsType> = (
-    {posts, newPostTitle, addPost, changeNewPostText}) => {
+    {posts, newPostTitle, dispatch}) => {
 
 //Elements
     const postItems = posts.map(p => {
@@ -28,8 +27,7 @@ export const MyPosts:React.FC<ProfilePagePropsType> = (
         <div className={classes.postAreaWrapper}>
             <PostAddForm
                 newPostTitle={newPostTitle}
-                addPost={addPost}
-                changeNewPostText={changeNewPostText}
+                dispatch={dispatch}
             />
             <div>
                 {postItems}
@@ -41,18 +39,20 @@ export const MyPosts:React.FC<ProfilePagePropsType> = (
 
 //Local components
     type PostAddFormProps = {
-        addPost: (newPostTitle: string) => void
-        changeNewPostText: (newPostValue: string) => void
         newPostTitle: string
+        dispatch: (action: any) => void
     }
     const PostAddForm = (props: PostAddFormProps) => {
 
         const addPostOnClickHandler = () => {
-            props.addPost(props.newPostTitle)
+            props.dispatch({type: "ADD-POST"})
         }
         const addPostOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let newPostValue = e.currentTarget.value
-            props.changeNewPostText(newPostValue)
+            let currentText = e.currentTarget.value
+            props.dispatch({
+                type: 'CHANGE-NEW-POST-TEXT',
+                newPostValue: currentText
+            })
         }
         return (
             <>

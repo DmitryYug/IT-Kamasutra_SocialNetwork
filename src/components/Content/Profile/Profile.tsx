@@ -6,22 +6,20 @@ import {PostItemType} from "../../../redux/state";
 
 type ProfilePagePropsType = {
     newPostTitle: string
-    addPost: (newPostTitle: string) => void
-    changeNewPostText: (newPostValue: string) => void
     posts: Array<PostItemType>
+    dispatch: (action: any) => void
 }
 
 
 export const Profile:React.FC<ProfilePagePropsType> = (
-    {posts, newPostTitle, addPost, changeNewPostText}) => {
+    {posts, newPostTitle, dispatch}) => {
     return(
         <div>
             <ProfileInfo />
             <MyPosts
                 newPostTitle={newPostTitle}
-                addPost={addPost}
-                changeNewPostText={changeNewPostText}
                 posts={posts}
+                dispatch={dispatch}
             />
         </div>
     )

@@ -27,13 +27,10 @@ export type RootsStateType = {
 }
 export type StoreType = {
     _state: RootsStateType
-    addPost: (newPostValue: string) => void
-    changeNewPostText: (newPostValue: string) => void
-    changeNewMessageText: (newMessage: string) => void
-    addNewMessage: (newMessage: string) => void
     _renderEntireTree: () => void
     subscriber: (observer: () => void) => void
     getState: () => RootsStateType
+    dispatch: (action: any) => void
 }
 
 export let store: StoreType = {
@@ -65,6 +62,7 @@ export let store: StoreType = {
     _renderEntireTree () {
         console.log('rendered')
     },
+
 //Dont change state
     getState () {
         return this._state
@@ -72,29 +70,29 @@ export let store: StoreType = {
     subscriber (observer: () => void) {
         this._renderEntireTree = observer
     },
-//Do change state
-    addPost (newPostValue: string) {
-        let newPost: PostItemType = {id: v1(), message: newPostValue, likes: 0}
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._renderEntireTree()
-    },
-    changeNewPostText (newPostValue: string) {
-        this._state.profilePage.newPostText = newPostValue
-        this._renderEntireTree()
-    },
-    changeNewMessageText (newMessage: string) {
-        console.log(newMessage)
-        this._state.dialogsPage.newMessageText = newMessage
-        this._renderEntireTree()
-    },
-    addNewMessage (newMessage: string) {
-        this._state.dialogsPage.messages.push({message: newMessage})
-        this._state.dialogsPage.newMessageText = ''
-        this._renderEntireTree()
-    },
 
-
+    dispatch (action: any) {
+        if (action.type === "ADD-POST") {
+            let newPost: PostItemType = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                likes: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._renderEntireTree()
+        } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPostValue
+            this._renderEntireTree()
+        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newMessage
+            this._renderEntireTree()
+        } else if (action.type === 'ADD-NEW-MESSAGE') {
+            this._state.dialogsPage.messages.push({message: this._state.dialogsPage.newMessageText})
+            this._state.dialogsPage.newMessageText = ''
+            this._renderEntireTree()
+        }
+    }
 
 
 }
