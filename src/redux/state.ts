@@ -31,7 +31,7 @@ export type StoreType = {
     changeNewPostText: (newPostValue: string) => void
     changeNewMessageText: (newMessage: string) => void
     addNewMessage: (newMessage: string) => void
-    renderEntireTree: () => void
+    _renderEntireTree: () => void
     subscriber: (observer: () => void) => void
     getState: () => RootsStateType
 }
@@ -62,34 +62,39 @@ export let store: StoreType = {
             ]
         }
     },
+    _renderEntireTree () {
+        console.log('rendered')
+    },
+//Dont change state
+    getState () {
+        return this._state
+    },
+    subscriber (observer: () => void) {
+        this._renderEntireTree = observer
+    },
+//Do change state
     addPost (newPostValue: string) {
         let newPost: PostItemType = {id: v1(), message: newPostValue, likes: 0}
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        this.renderEntireTree()
+        this._renderEntireTree()
     },
     changeNewPostText (newPostValue: string) {
         this._state.profilePage.newPostText = newPostValue
-        this.renderEntireTree()
+        this._renderEntireTree()
     },
     changeNewMessageText (newMessage: string) {
-        // this.state.dialogsPage.newMessageText = newMessage
         console.log(newMessage)
         this._state.dialogsPage.newMessageText = newMessage
-        this.renderEntireTree()
+        this._renderEntireTree()
     },
     addNewMessage (newMessage: string) {
         this._state.dialogsPage.messages.push({message: newMessage})
         this._state.dialogsPage.newMessageText = ''
-        this.renderEntireTree()
+        this._renderEntireTree()
     },
-    renderEntireTree () {
-        console.log('rendered')
-    },
-    subscriber (observer: () => void) {
-        this.renderEntireTree = observer
-    },
-    getState () {
-        return this._state
-    }
+
+
+
+
 }
