@@ -9,7 +9,7 @@ type ProfilePagePropsType = {
     posts: Array<PostItemType>
     dispatch: (action: any) => void
 }
-export const MyPosts:React.FC<ProfilePagePropsType> = (
+export const MyPosts: React.FC<ProfilePagePropsType> = (
     {posts, newPostTitle, dispatch}) => {
 
 //Elements
@@ -38,43 +38,51 @@ export const MyPosts:React.FC<ProfilePagePropsType> = (
 
 
 //Local components
-    type PostAddFormProps = {
-        newPostTitle: string
-        dispatch: (action: any) => void
-    }
-    const PostAddForm = (props: PostAddFormProps) => {
+type PostAddFormProps = {
+    newPostTitle: string
+    dispatch: (action: any) => void
+}
 
-        const addPostOnClickHandler = () => {
-            props.dispatch({type: "ADD-POST"})
-        }
-        const addPostOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let currentText = e.currentTarget.value
-            props.dispatch({
-                type: 'CHANGE-NEW-POST-TEXT',
-                newPostValue: currentText
-            })
-        }
-        return (
-            <>
-                <h2 className={classes.item}>
-                    My posts
-                </h2>
-                <div>
+const addPostAC = () => ({
+    type: "ADD-POST"
+})
+
+const changePostAC = (currentText: string) => ({
+        type: 'CHANGE-NEW-POST-TEXT',
+        newPostValue: currentText
+})
+
+
+const PostAddForm = (props: PostAddFormProps) => {
+
+    const addPostOnClickHandler = () => {
+        props.dispatch(addPostAC())
+    }
+    const addPostOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let currentText = e.currentTarget.value
+        props.dispatch(changePostAC(currentText))
+    }
+    return (
+        <>
+            <h2 className={classes.item}>
+                My posts
+            </h2>
+            <div>
                     <textarea
                         value={props.newPostTitle}
                         onChange={addPostOnChangeHandler}
                     >
                     </textarea>
-                </div>
-                <div>
-                    <button
-                        className={classes.addPostBtn}
-                        onClick={addPostOnClickHandler}
-                    >
-                        Add post
-                    </button>
-                </div>
-            </>
-        )
-    }
+            </div>
+            <div>
+                <button
+                    className={classes.addPostBtn}
+                    onClick={addPostOnClickHandler}
+                >
+                    Add post
+                </button>
+            </div>
+        </>
+    )
+}
 

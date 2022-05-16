@@ -72,6 +72,7 @@ export let store: StoreType = {
     },
 
     dispatch (action: any) {
+        // debugger
         if (action.type === "ADD-POST") {
             let newPost: PostItemType = {
                 id: v1(),
