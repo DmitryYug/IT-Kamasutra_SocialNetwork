@@ -29,12 +29,12 @@ export const profileReducer = (state = initialProfilePageState, action: any) => 
     }
 }
 
-export const addPostAC = () => {
+export const AddPostAC = () => {
     return {
         type: "ADD-POST"
     } as const
 }
-export const changePostAC = (currentText: string) => ({
+export const ChangePostAC = (currentText: string) => ({
     type: 'CHANGE-NEW-POST-TEXT',
     newPostValue: currentText
 })

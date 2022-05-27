@@ -34,10 +34,10 @@ export const dialogsReducer = (state = initialDialogsPageState, action: any) => 
     }
 }
 
-export const changeMessageAC = (newMessageValue: string) => ({
+export const ChangeMessageAC = (newMessageValue: string) => ({
     type: "CHANGE-NEW-MESSAGE-TEXT",
     newMessage: newMessageValue
 })
-export const addMessageAC = () => ({
+export const AddMessageAC = () => ({
     type: 'ADD-NEW-MESSAGE'
 })

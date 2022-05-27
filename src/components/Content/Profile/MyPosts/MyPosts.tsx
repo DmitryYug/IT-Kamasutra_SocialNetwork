@@ -2,16 +2,18 @@ import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
 import {PostItemType} from "../../../../redux/store";
-import {addPostAC, changePostAC} from "../../../../redux/profile-reducer";
+import {PostAddForm} from "./PostAddForm/PostAddForm";
 
 
-type ProfilePagePropsType = {
+type MyPostsPropsType = {
+    addPostOnClick: () => void,
+    addPostOnChange: (currentPostText: string) => void,
+    posts: Array<PostItemType>,
     newPostTitle: string
-    posts: Array<PostItemType>
-    dispatch: (action: any) => void
 }
-export const MyPosts: React.FC<ProfilePagePropsType> = (
-    {posts, newPostTitle, dispatch}) => {
+
+export const MyPosts: React.FC<MyPostsPropsType> = (
+    {addPostOnClick, addPostOnChange, posts, newPostTitle}) => {
 
 //Elements
     const postItems = posts.map(p => {
@@ -27,54 +29,14 @@ export const MyPosts: React.FC<ProfilePagePropsType> = (
     return (
         <div className={classes.postAreaWrapper}>
             <PostAddForm
+                addPostOnClick={addPostOnClick}
+                addPostOnChange={addPostOnChange}
                 newPostTitle={newPostTitle}
-                dispatch={dispatch}
             />
             <div>
                 {postItems}
             </div>
         </div>
-    )
-}
-
-
-//Local components
-type PostAddFormProps = {
-    newPostTitle: string
-    dispatch: (action: any) => void
-}
-
-
-const PostAddForm = (props: PostAddFormProps) => {
-
-    const addPostOnClickHandler = () => {
-        props.dispatch(addPostAC())
-    }
-    const addPostOnChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let currentText = e.currentTarget.value
-        props.dispatch(changePostAC(currentText))
-    }
-    return (
-        <>
-            <h2 className={classes.item}>
-                My posts
-            </h2>
-            <div>
-                    <textarea
-                        value={props.newPostTitle}
-                        onChange={addPostOnChangeHandler}
-                    >
-                    </textarea>
-            </div>
-            <div>
-                <button
-                    className={classes.addPostBtn}
-                    onClick={addPostOnClickHandler}
-                >
-                    Add post
-                </button>
-            </div>
-        </>
     )
 }
 

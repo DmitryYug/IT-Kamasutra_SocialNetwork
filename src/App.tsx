@@ -9,6 +9,7 @@ import {Music} from "./components/Content/Music/Music";
 import {News} from "./components/Content/News/News";
 import {Route} from "react-router-dom";
 import {StoreType} from "./redux/store";
+import {DialogsContainer} from "./components/Content/Dialogs/DialogsContainer";
 
 
 type AppPropsType = {
@@ -17,16 +18,6 @@ type AppPropsType = {
 }
 
 function App(props: AppPropsType) {
-
-    const {dialogs, messages, newMessageText} = props.state.dialogsReducer
-    const {posts, newPostText} = props.state.profileReducer
-    const {dispatch} = props.store
-    // console.log(dispatch)
-    // console.log(props.state)
-
-    // const {dialogs, messages, newMessageText} = props.store.getState().dialogsReducer
-    // const {posts, newPostText} = props.store.getState().profileReducer
-    // const {dispatch} = props.store
 
     return (
         <div className="app-wrapper">
@@ -37,22 +28,16 @@ function App(props: AppPropsType) {
                     path='/profile'
                     render={() =>
                         <Profile
-                            newPostTitle={newPostText}
-                            // dispatch={dispatch.bind(props.store)}
-                            dispatch={dispatch}
-                            posts={posts}
+                            store={props.store}
                         />}
                 />
                 <Route
                     path='/dialogs'
                     render={() =>
-                        <Dialogs
-                            newMessageText={newMessageText}
-                            dialogs={dialogs}
-                            messages={messages}
-                            // dispatch={dispatch.bind(props.store)}
-                            dispatch={dispatch}
-                        />}
+                       <DialogsContainer
+                           store={props.store}
+                       />
+                    }
                 />
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
