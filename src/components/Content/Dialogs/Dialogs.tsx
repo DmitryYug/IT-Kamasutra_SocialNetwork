@@ -35,8 +35,6 @@ export function Dialogs(props: DialogsPropsType) {
         )
     })
 
-
-
     return (
         <div className={classes.dialogs_wrapper}>
             <div className={classes.dialogs}>

@@ -12,14 +12,21 @@ import {StoreType} from "./redux/store";
 
 
 type AppPropsType = {
-    store: StoreType
+    state: any,
+    store: any
 }
 
 function App(props: AppPropsType) {
 
-    const {dialogs, messages, newMessageText} = props.store.getState().dialogsPage
-    const {posts, newPostText} = props.store.getState().profilePage
+    const {dialogs, messages, newMessageText} = props.state.dialogsReducer
+    const {posts, newPostText} = props.state.profileReducer
     const {dispatch} = props.store
+    // console.log(dispatch)
+    // console.log(props.state)
+
+    // const {dialogs, messages, newMessageText} = props.store.getState().dialogsReducer
+    // const {posts, newPostText} = props.store.getState().profileReducer
+    // const {dispatch} = props.store
 
     return (
         <div className="app-wrapper">
@@ -31,7 +38,8 @@ function App(props: AppPropsType) {
                     render={() =>
                         <Profile
                             newPostTitle={newPostText}
-                            dispatch={dispatch.bind(props.store)}
+                            // dispatch={dispatch.bind(props.store)}
+                            dispatch={dispatch}
                             posts={posts}
                         />}
                 />
@@ -42,7 +50,8 @@ function App(props: AppPropsType) {
                             newMessageText={newMessageText}
                             dialogs={dialogs}
                             messages={messages}
-                            dispatch={dispatch.bind(props.store)}
+                            // dispatch={dispatch.bind(props.store)}
+                            dispatch={dispatch}
                         />}
                 />
                 <Route path='/news' component={News}/>

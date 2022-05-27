@@ -44,15 +44,6 @@ type PostAddFormProps = {
     dispatch: (action: any) => void
 }
 
-// const addPostAC = () => ({
-//     type: "ADD-POST"
-// })
-//
-// const changePostAC = (currentText: string) => ({
-//         type: 'CHANGE-NEW-POST-TEXT',
-//         newPostValue: currentText
-// })
-
 
 const PostAddForm = (props: PostAddFormProps) => {
 
