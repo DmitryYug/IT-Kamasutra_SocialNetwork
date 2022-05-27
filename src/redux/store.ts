@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 export type PostItemType = {
     id: string,
@@ -10,9 +12,11 @@ export type ProfilePageType = {
     posts: Array<PostItemType>
 }
 export type MessageItemType = {
+    id: string,
     message: string
 }
 export type DialogItemType = {
+    id: string,
     name: string,
     path: string
 }
@@ -46,16 +50,16 @@ export let store: StoreType = {
         dialogsPage: {
             newMessageText: '',
             dialogs: [
-                {name: 'Dmitry', path: '1'},
-                {name: 'Max', path: '2'},
-                {name: 'Denis', path: '3'},
-                {name: 'Incubator', path: '4'}
+                {id: v1(), name: 'Dmitry', path: '1'},
+                {id: v1(), name: 'Max', path: '2'},
+                {id: v1(), name: 'Denis', path: '3'},
+                {id: v1(), name: 'Incubator', path: '4'}
             ],
             messages: [
-                {message: 'Hey'},
-                {message: 'Whats upp'},
-                {message: 'How is your incubator'},
-                {message: 'React is easy'}
+                {id: v1(), message: 'Hey'},
+                {id: v1(), message: 'Whats upp'},
+                {id: v1(), message: 'How is your incubator'},
+                {id: v1(), message: 'React is easy'}
             ]
         }
     },
@@ -72,27 +76,9 @@ export let store: StoreType = {
     },
 
     dispatch (action: any) {
-        // debugger
-        if (action.type === "ADD-POST") {
-            let newPost: PostItemType = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                likes: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._renderEntireTree()
-        } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newPostValue
-            this._renderEntireTree()
-        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newMessage
-            this._renderEntireTree()
-        } else if (action.type === 'ADD-NEW-MESSAGE') {
-            this._state.dialogsPage.messages.push({message: this._state.dialogsPage.newMessageText})
-            this._state.dialogsPage.newMessageText = ''
-            this._renderEntireTree()
-        }
+        this._state.profilePage = profileReducer(store._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(store._state.dialogsPage, action)
+        this._renderEntireTree()
     }
 
 

@@ -2,18 +2,14 @@ import React, {RefObject} from "react";
 import classes from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {MessageItem} from "./MessageItem/MessageItem";
-import {
-    DialogItemType,
-    MessageItemType
-} from "../../../redux/state";
+import {DialogItemType, MessageItemType} from "../../../redux/store";
+import {addMessageAC, changeMessageAC} from "../../../redux/dialogs-reducer";
 
 
 type DialogsPropsType = {
     newMessageText: string
     dialogs: Array<DialogItemType>
     messages: Array<MessageItemType>
-    // changeNewMessageText: (newMessageValue: string) => void
-    // addNewMessage: (newMessageValue: string) => void
     dispatch: (action: any) => void
 
 }
@@ -25,13 +21,17 @@ export function Dialogs(props: DialogsPropsType) {
     const dialogItems = props.dialogs.map(d => {
         return (
             <DialogItem
+                key={d.id}
                 name={d.name}
-                path={d.path}/>
+                path={d.path}
+            />
         )
     })
     const messageItems = props.messages.map(m => {
         return (
-            <MessageItem message={m.message}/>
+            <MessageItem
+                key={m.id}
+                message={m.message}/>
         )
     })
 
@@ -49,9 +49,6 @@ export function Dialogs(props: DialogsPropsType) {
                 <NewMessage
                     newMessageText={props.newMessageText}
                     dispatch={props.dispatch}
-
-                    // changeNewMessageText={props.changeNewMessageText}
-                    // addNewMessage={props.addNewMessage}
                 />
             </div>
         </div>
@@ -61,10 +58,7 @@ export function Dialogs(props: DialogsPropsType) {
 //Local components
     type NewMessagePropsType = {
         newMessageText: string
-        // changeNewMessageText: (newMessageValue: string) => void
-        // addNewMessage: (newMessageValue: string) => void
         dispatch: (action: any) => void
-
     }
 
     const NewMessage: React.FC<NewMessagePropsType> = (props) => {
@@ -72,16 +66,13 @@ export function Dialogs(props: DialogsPropsType) {
         let newMessageElement: RefObject<HTMLTextAreaElement> = React.createRef()
 
         const addMessageOnClickHandler = () => {
-            props.dispatch({type: "ADD-NEW-MESSAGE"})
-            // props.addNewMessage(props.newMessageText)
-            // console.log(props.newMessageText)
-            // console.log('ok')
+            props.dispatch(addMessageAC())
         }
         const addMessageOnChangeHandler = () => {
             let newMessageValue = newMessageElement.current?.value
-            props.dispatch({type: "CHANGE-NEW-MESSAGE-TEXT", newMessage: newMessageValue})
-            // props.changeNewMessageText(newMessageValue)
-
+            if (newMessageValue) {
+                props.dispatch(changeMessageAC(newMessageValue))
+            }
         }
 
         return(

@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {PostItemType} from "../../../../redux/state";
+import {PostItemType} from "../../../../redux/store";
+import {addPostAC, changePostAC} from "../../../../redux/profile-reducer";
 
 
 type ProfilePagePropsType = {
@@ -43,14 +44,14 @@ type PostAddFormProps = {
     dispatch: (action: any) => void
 }
 
-const addPostAC = () => ({
-    type: "ADD-POST"
-})
-
-const changePostAC = (currentText: string) => ({
-        type: 'CHANGE-NEW-POST-TEXT',
-        newPostValue: currentText
-})
+// const addPostAC = () => ({
+//     type: "ADD-POST"
+// })
+//
+// const changePostAC = (currentText: string) => ({
+//         type: 'CHANGE-NEW-POST-TEXT',
+//         newPostValue: currentText
+// })
 
 
 const PostAddForm = (props: PostAddFormProps) => {
