@@ -10,14 +10,15 @@ import {News} from "./components/Content/News/News";
 import {Route} from "react-router-dom";
 import {StoreType} from "./redux/store";
 import {DialogsContainer} from "./components/Content/Dialogs/DialogsContainer";
+import {AppRootStateType, RootsStateType} from "./redux/redux-store";
 
 
-type AppPropsType = {
-    state: any,
-    store: any
-}
+// type AppPropsType = {
+//     state: RootsStateType,
+//     store: AppRootStateType
+// }
 
-function App(props: AppPropsType) {
+function App() {
 
     return (
         <div className="app-wrapper">
@@ -28,14 +29,14 @@ function App(props: AppPropsType) {
                     path='/profile'
                     render={() =>
                         <Profile
-                            store={props.store}
+                            // store={props.store}
                         />}
                 />
                 <Route
                     path='/dialogs'
                     render={() =>
                        <DialogsContainer
-                           store={props.store}
+                           // store={props.store}
                        />
                     }
                 />

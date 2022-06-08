@@ -6,15 +6,15 @@ import {PostAddForm} from "./PostAddForm/PostAddForm";
 
 
 type MyPostsPropsType = {
+    posts: Array<PostItemType>,
+    newPostTitle: string,
     addPostOnClick: () => void,
     addPostOnChange: (currentPostText: string) => void,
-    posts: Array<PostItemType>,
-    newPostTitle: string
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (
     {addPostOnClick, addPostOnChange, posts, newPostTitle}) => {
-
+    // debugger
 //Elements
     const postItems = posts.map(p => {
         return (
