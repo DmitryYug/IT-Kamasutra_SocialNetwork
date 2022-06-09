@@ -1,67 +1,28 @@
 import React from "react";
 import {Dialogs} from "./Dialogs";
 import {AddMessageAC, ChangeMessageAC} from "../../../redux/dialogs-reducer";
-import {RootsStateType} from "../../../redux/redux-store";
-import {AddPostAC, ChangePostAC} from "../../../redux/profile-reducer";
+import {DialogItemType, MessageItemType, RootsStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
-import {MyPosts} from "../Profile/MyPosts/MyPosts";
+import {Dispatch} from "redux";
 
-// type DialogsContainerPropsType = {
-//     store: any
-// }
+type MapStateToProps = {
+    newMessageText: string
+    dialogs: Array<DialogItemType>,
+    messages: Array<MessageItemType>
+}
+type MapDispatchToProps = {
+    addMessageOnClick: () => void
+    addMessageOnChange: (newMessageValue: string) => void
+}
 
-// export const DialogsContainer = (props: DialogsContainerPropsType) => {
-//
-//     const {dialogs, messages, newMessageText} = props.store.getState().dialogsReducer
-//
-//     const addMessageOnClick = () => {
-//         props.store.dispatch(AddMessageAC())
-//     }
-//     const addMessageOnChange = (newMessageValue: string) => {
-//         props.store.dispatch(ChangeMessageAC(newMessageValue))
-//     }
-//
-//     return (
-//         <Dialogs
-//             dialogs={dialogs}
-//             messages={messages}
-//             newMessageText={newMessageText}
-//             addMessageOnClick={addMessageOnClick}
-//             addMessageOnChange={addMessageOnChange}
-//         />
-//     )
-// }
-// export const DialogsContainer = () => {
-
-// const {dialogs, messages, newMessageText} = props.store.getState().dialogsReducer
-//
-// const addMessageOnClick = () => {
-//     props.store.dispatch(AddMessageAC())
-// }
-// const addMessageOnChange = (newMessageValue: string) => {
-//     props.store.dispatch(ChangeMessageAC(newMessageValue))
-// }
-//
-// return (
-//     <Dialogs
-//         dialogs={dialogs}
-//         messages={messages}
-//         newMessageText={newMessageText}
-//         addMessageOnClick={addMessageOnClick}
-//         addMessageOnChange={addMessageOnChange}
-//     />
-// )
-// }
-
-
-let mapStateToProps = (state: RootsStateType) => {
+let mapStateToProps = (state: RootsStateType): MapStateToProps => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         addMessageOnClick: () => {
             dispatch(AddMessageAC())

@@ -1,5 +1,11 @@
 import {v1} from "uuid";
-import {PostItemType, ProfilePageType} from "./store";
+import {PostItemType, ProfilePageType} from "./redux-store";
+
+
+type AddPostACType = ReturnType<typeof AddPostAC>
+type ChangePostACType = ReturnType<typeof ChangePostAC>
+type ProfileReducerTypes = AddPostACType | ChangePostACType
+
 
 let initialProfilePageState: ProfilePageType = {
     newPostText: '',
@@ -10,7 +16,8 @@ let initialProfilePageState: ProfilePageType = {
     ],
 }
 
-export const profileReducer = (state = initialProfilePageState, action: any) => {
+export const profileReducer =
+    (state = initialProfilePageState, action: ProfileReducerTypes): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
             let newPost: PostItemType = {
@@ -20,10 +27,10 @@ export const profileReducer = (state = initialProfilePageState, action: any) => 
             }
             state.posts.push(newPost)
             state.newPostText = ''
-            return state
+            return {...state}
         case 'CHANGE-NEW-POST-TEXT':
             state.newPostText = action.newPostValue
-            return state
+            return {...state}
         default:
             return state
     }
@@ -34,7 +41,10 @@ export const AddPostAC = () => {
         type: "ADD-POST"
     } as const
 }
-export const ChangePostAC = (currentText: string) => ({
-    type: 'CHANGE-NEW-POST-TEXT',
-    newPostValue: currentText
-})
+
+export const ChangePostAC = (currentText: string) => {
+    return {
+        type: 'CHANGE-NEW-POST-TEXT',
+        newPostValue: currentText
+    } as const
+}

@@ -1,42 +1,26 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {AddPostAC, ChangePostAC} from "../../../../redux/profile-reducer";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
-import {RootsStateType} from "../../../../redux/redux-store";
+import {PostItemType, RootsStateType} from "../../../../redux/redux-store";
+import {Dispatch} from "redux";
 
-// type MyPostsContainerPropsType = {
-//     store: any
-// }
+type MapStateToProps = {
+    posts: Array<PostItemType>
+    newPostTitle: string
+}
+type MapDispatchToProps = {
+    addPostOnClick: () => void
+    addPostOnChange: (currentPostText: string) => void
+}
 
-// export const MyPostsContainer: React.FC<MyPostsContainerPropsType> = (props) => {
-//
-//     const {posts, newPostText} = props.store.getState().profileReducer
-//
-//     const addPostOnClick = () => {
-//         props.store.dispatch(AddPostAC())
-//     }
-//     const addPostOnChange = (currentPostText: string) => {
-//         props.store.dispatch(ChangePostAC(currentPostText))
-//     }
-//
-//     return (
-//         <MyPosts
-//             addPostOnClick={addPostOnClick}
-//             addPostOnChange={addPostOnChange}
-//             posts={posts}
-//             newPostTitle={newPostText}
-//         />
-//     )
-// }
-
-let mapStateToProps = (state: RootsStateType) => {
-    // debugger
+let mapStateToProps = (state: RootsStateType): MapStateToProps => {
     return {
         posts: state.profilePage.posts,
         newPostTitle: state.profilePage.newPostText
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     return {
         addPostOnClick: () => {
             dispatch(AddPostAC())

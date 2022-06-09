@@ -1,5 +1,9 @@
 import {v1} from "uuid";
-import {DialogsPageType} from "./store";
+import {DialogsPageType} from "./redux-store";
+
+type AddMessageACType = ReturnType<typeof AddMessageAC>
+type ChangeMessageACType = ReturnType<typeof ChangeMessageAC>
+type DialogsReducerType = ChangeMessageACType | AddMessageACType
 
 let initialDialogsPageState: DialogsPageType = {
     newMessageText: '',
@@ -18,26 +22,31 @@ let initialDialogsPageState: DialogsPageType = {
 }
 
 
-export const dialogsReducer = (state = initialDialogsPageState, action: any) => {
-    switch (action.type) {
-        case 'CHANGE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newMessage
-            return state
-        case 'ADD-NEW-MESSAGE':
-            state.messages.push(
-                {id: v1(), message: state.newMessageText}
-            )
-            state.newMessageText = ''
-            return state
-        default:
-            return state
+export const dialogsReducer =
+    (state = initialDialogsPageState, action: DialogsReducerType): DialogsPageType => {
+        switch (action.type) {
+            case 'CHANGE-NEW-MESSAGE-TEXT':
+                state.newMessageText = action.newMessage
+                return {...state}
+            case 'ADD-NEW-MESSAGE':
+                state.messages.push(
+                    {id: v1(), message: state.newMessageText}
+                )
+                state.newMessageText = ''
+                return {...state}
+            default:
+                return state
+        }
     }
-}
 
-export const ChangeMessageAC = (newMessageValue: string) => ({
-    type: "CHANGE-NEW-MESSAGE-TEXT",
-    newMessage: newMessageValue
-})
-export const AddMessageAC = () => ({
-    type: 'ADD-NEW-MESSAGE'
-})
+export const ChangeMessageAC = (newMessageValue: string) => {
+    return {
+        type: "CHANGE-NEW-MESSAGE-TEXT",
+        newMessage: newMessageValue
+    } as const
+}
+export const AddMessageAC = () => {
+    return {
+        type: 'ADD-NEW-MESSAGE'
+    } as const
+}

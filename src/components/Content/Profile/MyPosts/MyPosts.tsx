@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import {Post} from "./Post/Post";
-import {PostItemType} from "../../../../redux/store";
 import {PostAddForm} from "./PostAddForm/PostAddForm";
+import {PostItemType} from "../../../../redux/redux-store";
 
 
 type MyPostsPropsType = {
@@ -13,8 +13,9 @@ type MyPostsPropsType = {
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (
-    {addPostOnClick, addPostOnChange, posts, newPostTitle}) => {
-    // debugger
+    {addPostOnClick, addPostOnChange, posts, newPostTitle}
+) => {
+
 //Elements
     const postItems = posts.map(p => {
         return (
