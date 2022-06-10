@@ -5,6 +5,7 @@ import {Profile} from "./components/Content/Profile/Profile";
 import {Route} from "react-router-dom";
 import {DialogsContainer} from "./components/Content/Dialogs/DialogsContainer";
 import {HeaderWithUI} from "./components/Header/HeaderWithUI";
+import {UsersContainer} from "./componentsWithUI/Content/Users/UsersContainer";
 
 export const AppWithUI = () => {
     return (
@@ -18,6 +19,10 @@ export const AppWithUI = () => {
                 <Route
                     path='/dialogs'
                     render={() => <DialogsContainer/>}
+                />
+                <Route
+                    path='/users'
+                    render={() => <UsersContainer/>}
                 />
             </div>
         </div>

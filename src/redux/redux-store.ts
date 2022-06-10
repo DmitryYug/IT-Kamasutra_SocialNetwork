@@ -1,6 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {AddPostAC, ChangePostAC, profileReducer} from "./profile-reducer";
 import {AddMessageAC, ChangeMessageAC, dialogsReducer} from "./dialogs-reducer";
+import {usersReducer, UsersType} from "./users-reducer";
 
 export type PostItemType = {
     id: string,
@@ -28,38 +29,18 @@ export type DialogsPageType = {
 export type RootsStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
+    users: Array<UsersType>
 }
-
-
-// type AddPostACType = ReturnType<typeof AddPostAC>
-// type ChangePostACType = ReturnType<typeof ChangePostAC>
-// type AddMessageACType = ReturnType<typeof AddMessageAC>
-// type ChangeMessageACType = ReturnType<typeof ChangeMessageAC>
-
-
-// export type AllActionTypes = AddPostACType
-//     | ChangePostACType
-//     | AddMessageACType
-//     | ChangeMessageACType
-
-// export type StoreType = {
-//     _state: RootsStateType
-//     _renderEntireTree: () => void
-//     subscriber: (observer: () => void) => void
-//     getState: () => RootsStateType
-//     dispatch: (action: any) => void
-// }
-
 
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogsPage: dialogsReducer
+    dialogsPage: dialogsReducer,
+    users: usersReducer
 })
 
 let store = createStore(rootReducer)
 
 export type  AppRootStateType = ReturnType<typeof rootReducer>
-
 
 export default store

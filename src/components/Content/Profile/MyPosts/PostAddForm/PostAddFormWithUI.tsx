@@ -27,10 +27,9 @@ export const PostAddFormWithUI: React.FC<PostAddFormProps> = (
                 <TextField
                     id="outlined-basic"
                     label="Type new post here"
-                    variant="outlined"
+                    variant='standard'
                     value={newPostTitle}
                     onChange={addPostOnChangeHandler}
-
                 />
             </div>
             <div>

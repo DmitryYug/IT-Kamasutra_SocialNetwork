@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Post.module.css";
 import {PostItemType} from "../../../../../redux/redux-store";
 import {Avatar, Card, CardContent, CardHeader, CardMedia, Typography} from "@mui/material";
-import {red} from "@mui/material/colors";
 
 export function PostWithUI (props: PostItemType) {
     return (
@@ -10,9 +9,7 @@ export function PostWithUI (props: PostItemType) {
             <CardHeader
                 className={classes.item}
                 avatar={
-                    <Avatar
-                        // sx={{ bgcolor: red[500] }} aria-label="recipe"
-                    >
+                    <Avatar>
                         <img src="https://byuc.files.wordpress.com/2012/07/avat-2.jpg"/>
                     </Avatar>
                 }
@@ -23,46 +20,3 @@ export function PostWithUI (props: PostItemType) {
 
     )
 }
-
-//Local components
-//     const Avatar = () => {
-//     return (
-//         <div className={classes.item}>
-//             <img src="https://byuc.files.wordpress.com/2012/07/avat-2.jpg"/>
-//         </div>
-//     )
-// }
-    const PostItem = (props: any) => {
-    return (
-        <div>
-            <div>
-                {props.message}
-            </div>
-            <div>
-                {props.likes} people liked it
-            </div>
-        </div>
-    )
-}
-
-
-
-
-
-// <Card sx={{ maxWidth: 100}}>
-//     <CardMedia
-//         className={classes.item}
-//         component="img"
-//         height="100px"
-//         image="https://byuc.files.wordpress.com/2012/07/avat-2.jpg"
-//         alt="green iguana"
-//     />
-//     <CardContent>
-//         <Typography gutterBottom variant="h5" component="div">
-//             {props.message}
-//         </Typography>
-//         <Typography variant="body2" color="text.secondary">
-//             {props.likes} users liked it
-//         </Typography>
-//     </CardContent>
-// </Card>

@@ -4,6 +4,7 @@ import classes from './Navbar.module.css';
 import {Avatar, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MessageIcon from '@mui/icons-material/Message';
+import GroupIcon from '@mui/icons-material/Group';
 
 
 export function NavbarWithUI () {
@@ -26,6 +27,16 @@ export function NavbarWithUI () {
                             <MessageIcon/>
                         </ListItemIcon>
                         <ListItemText primary="Messages" />
+                    </ListItemButton>
+                </NavLink>
+            </ListItem>
+            <ListItem className={classes.item}>
+                <NavLink to='/users' activeClassName={classes.active}>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <GroupIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Users" />
                     </ListItemButton>
                 </NavLink>
             </ListItem>

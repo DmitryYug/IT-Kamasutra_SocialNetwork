@@ -28,14 +28,18 @@ export function DialogsWithUI(props: DialogsPropsType) {
 //Elements
     const dialogItems = props.dialogs.map(d => {
         return (
-            <div className={classes.dialogs_item}>
+            <div
+            key={d.id}
+                className={classes.dialogs_item}>
                 {d.name}
             </div>
         )
     })
     const messageItems = props.messages.map(m => {
         return (
-            <div className={classes.textArea}>
+            <div
+                key={m.id}
+                className={classes.textArea}>
                 {m.message}
             </div>
         )
