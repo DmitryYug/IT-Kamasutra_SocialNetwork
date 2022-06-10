@@ -18,7 +18,6 @@ import {AppRootStateType, RootsStateType} from "./redux/redux-store";
 // }
 
 function App() {
-
     return (
         <div className="app-wrapper">
             <Header/>
@@ -46,5 +45,4 @@ function App() {
         </div>
     )
 }
-
 export default App;

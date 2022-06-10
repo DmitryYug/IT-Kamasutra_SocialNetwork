@@ -1,5 +1,4 @@
 import React from "react";
-import {Dialogs} from "./Dialogs";
 import {AddMessageAC, ChangeMessageAC} from "../../../redux/dialogs-reducer";
 import {DialogItemType, MessageItemType, RootsStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
@@ -33,4 +32,5 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         }
     }
 }
+// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsWithUI)
