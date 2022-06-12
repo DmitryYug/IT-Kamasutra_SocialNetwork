@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css';
-import {Avatar, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
+import {Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MessageIcon from '@mui/icons-material/Message';
 import GroupIcon from '@mui/icons-material/Group';
@@ -13,7 +13,7 @@ export function NavbarWithUI () {
             <ListItem className={classes.item}>
                 <NavLink to='/profile' activeClassName={classes.active}>
                     <ListItemButton>
-                        <ListItemIcon>
+                        <ListItemIcon >
                             <AccountCircleIcon/>
                         </ListItemIcon>
                         <ListItemText primary="Profile" />
