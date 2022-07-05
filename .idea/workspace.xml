@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e96ceb75-dc39-4fd5-a13d-3c8fff396c6d" name="Changes" comment="Reusable AddItemField added" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2ATlFvx7ind23GVUkyKYnRae6Pt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/MyUiComponents/MyAddItemField" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/MyUiComponents/MyAddItemField" />
+      <recent name="$PROJECT_DIR$/src/components/MyUiComponents" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/Content/Users" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e96ceb75-dc39-4fd5-a13d-3c8fff396c6d" name="Changes" comment="" />
+      <created>1655041356331</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1655041356331</updated>
+      <workItem from="1655041358781" duration="539000" />
+      <workItem from="1655041988891" duration="347000" />
+      <workItem from="1655042353231" duration="2437000" />
+      <workItem from="1655055759651" duration="389000" />
+      <workItem from="1655056168732" duration="84000" />
+      <workItem from="1655056282469" duration="4184000" />
+      <workItem from="1655115194423" duration="1074000" />
+      <workItem from="1655116445012" duration="3428000" />
+      <workItem from="1655120509422" duration="1166000" />
+      <workItem from="1655121881166" duration="380000" />
+      <workItem from="1655122303765" duration="11294000" />
+      <workItem from="1655645470027" duration="393000" />
+      <workItem from="1655673845066" duration="1448000" />
+      <workItem from="1656058938789" duration="1261000" />
+      <workItem from="1656152785912" duration="3859000" />
+      <workItem from="1656236496359" duration="173000" />
+      <workItem from="1656236883987" duration="3700000" />
+      <workItem from="1656327633344" duration="700000" />
+      <workItem from="1656351244326" duration="1867000" />
+      <workItem from="1656411355697" duration="221000" />
+      <workItem from="1656440937798" duration="2618000" />
+      <workItem from="1656603026194" duration="1047000" />
+      <workItem from="1656670504875" duration="1039000" />
+      <workItem from="1656754365260" duration="477000" />
+      <workItem from="1656848862121" duration="439000" />
+      <workItem from="1656881304710" duration="6000" />
+      <workItem from="1657018177604" duration="3921000" />
+    </task>
+    <task id="LOCAL-00001" summary=" Samurai-way_54">
+      <created>1655057825019</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1655057825019</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" Samurai-way_55">
+      <created>1655159920626</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1655159920626</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Reusable AddItemField added">
+      <created>1656452019965</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1656452019965</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Reusable AddItemField added">
+      <created>1656452110110</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1656452110110</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" Samurai-way_54" />
+    <MESSAGE value=" Samurai-way_55" />
+    <MESSAGE value="Reusable AddItemField added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reusable AddItemField added" />
+  </component>
+</project>

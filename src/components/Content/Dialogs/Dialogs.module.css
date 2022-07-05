@@ -1,0 +1,55 @@
+.dialogs_wrapper {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 11fr;
+}
+.active {
+    color: gold;
+}
+
+.dialogs {
+
+}
+.dialogs_item {
+    text-align: right;
+    padding: 10px 0;
+}
+
+.messages {
+
+}
+
+.messages_item {
+    padding: 10px 0px;
+}
+
+.avatar img {
+    width: 60px;
+    background: gold;
+    border-radius: 200px;
+    border: 3px solid green;
+}
+
+.textArea {
+    max-width: 200px;
+    padding: 5px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background: #77baff;
+    /*border: 1px solid blue;*/
+    box-shadow: 2px 2px 2px black;
+    border-end-end-radius: 20px;
+    border-start-end-radius: 20px;
+    border-start-start-radius: 20px;
+
+}
+
+.time {
+    margin: 30px ;
+    color: red;
+}
+
+.name {
+    margin-left: 10px;
+    color: blue;
+}

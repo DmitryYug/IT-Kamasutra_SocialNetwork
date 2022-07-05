@@ -1,0 +1,12 @@
+.users-wrapper {
+
+}
+
+.item img {
+    width: 50px;
+}
+
+.activePage {
+    font-weight: bolder;
+    font-size: large;
+}
