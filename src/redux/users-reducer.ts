@@ -1,57 +1,64 @@
-import { v1 } from "uuid"
-import { UsersPageType, UsersType } from "./redux-store"
+import {v1} from "uuid"
+import {UsersPageType, UsersType} from "./redux-store"
 
 
-
-type FollowToggleACType = ReturnType <typeof FollowToggleAC>
-type SetUsersACType = ReturnType <typeof SetUsersAC>
-type SetUsersPagesACType = ReturnType <typeof SetCurrentPageAC>
-type SetTotalUsersCountACType = ReturnType <typeof SetTotalUsersCountAC>
-type UsersReducerTypes = 
+type FollowToggleACType = ReturnType<typeof FollowToggleAC>
+type SetUsersACType = ReturnType<typeof SetUsersAC>
+type SetUsersPagesACType = ReturnType<typeof SetCurrentPageAC>
+type SetTotalUsersCountACType = ReturnType<typeof SetTotalUsersCountAC>
+type IsFetchingToggleACType = ReturnType<typeof IsFetchingToggleAC>
+type UsersReducerTypes =
     FollowToggleACType
     | SetUsersACType
     | SetUsersPagesACType
     | SetTotalUsersCountACType
+    | IsFetchingToggleACType
 
 let initialUsersState: UsersPageType = {
     users: [],
     totalUsersCount: 0,
     pageSize: 5,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 
 
 export const usersReducer =
-    (state: UsersPageType  = initialUsersState, action: UsersReducerTypes): any => {
-    switch (action.type) {
-        case "FOLLOW-TOGGLE":
-            let currentUser = state.users.find(user => user.id === action.userId)
-            if (currentUser) {
-                currentUser.followed = !currentUser.followed
-            }
-            return {
-                ...state,
-                users: [...state.users]
-            }
-        case "SET-USERS":
-            return {
-                ...state,
-                users: [...action.users]
-            }
-        case "SET-CURRENT-PAGE":
-            return {
-                ...state, 
-                currentPage: action.pageNumber
-            }
-        case "SET-TOTAL-USERS":
-            return {
-                ...state,
-                totalUsersCount: action.totalUsersCount
-            }
-        default:
-            return state
+    (state: UsersPageType = initialUsersState, action: UsersReducerTypes): any => {
+        switch (action.type) {
+            case "FOLLOW-TOGGLE":
+                let currentUser = state.users.find(user => user.id === action.userId)
+                if (currentUser) {
+                    currentUser.followed = !currentUser.followed
+                }
+                return {
+                    ...state,
+                    users: [...state.users]
+                }
+            case "SET-USERS":
+                return {
+                    ...state,
+                    users: [...action.users]
+                }
+            case "SET-CURRENT-PAGE":
+                return {
+                    ...state,
+                    currentPage: action.pageNumber
+                }
+            case "SET-TOTAL-USERS":
+                return {
+                    ...state,
+                    totalUsersCount: action.totalUsersCount
+                }
+            case "IS-FETCHING-TOGGLE":
+                return {
+                    ...state, 
+                    isFetching: action.isFetching
+                }
+            default:
+                return state
+        }
     }
-}
 
 export const FollowToggleAC = (userId: string) => {
     return {
@@ -75,5 +82,11 @@ export const SetTotalUsersCountAC = (totalUsersCount: number) => {
     return {
         type: 'SET-TOTAL-USERS',
         totalUsersCount
-    } as const 
+    } as const
+}
+export const IsFetchingToggleAC = (isFetching: boolean) => {
+    return {
+        type: 'IS-FETCHING-TOGGLE',
+        isFetching
+    } as const
 }

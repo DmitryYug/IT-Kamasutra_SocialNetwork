@@ -4,18 +4,22 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootsStateType, UsersType} from "../../../redux/redux-store";
 import {
-    FollowToggleAC, SetCurrentPageAC, SetTotalUsersCountAC, SetUsersAC
+    FollowToggleAC, IsFetchingToggleAC, SetCurrentPageAC, SetTotalUsersCountAC, SetUsersAC
 } from "../../../redux/users-reducer";
+import { PaginationComponent } from "../../common/PaginationComponent";
+import { Preloader } from "../../common/Preloader";
 import {Users} from "./Users";
 
 
 class UsersApiContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
+        this.props.isFetchingToggle(true)
         axios.get(
             `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
         )
             .then(response => {
+                this.props.isFetchingToggle(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
             })
@@ -23,9 +27,11 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
+        this.props.isFetchingToggle(true)
         axios.get(
             `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
         ).then(response => {
+            this.props.isFetchingToggle(false)
             this.props.setUsers(response.data.items)
         })
     }
@@ -36,18 +42,24 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
         }
-
-        // const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        //     this.onPageChanged(value)
-        // };
-
+        const paginationOnChange = (value: number) => {
+            this.onPageChanged(value)
+        }
         return (
-            <Users
-                pages={pages}
-                users={this.props.users}
-                paginationOnChange={this.onPageChanged}
-                onFollow={this.props.onFollow}
-            />
+            <>
+                <PaginationComponent
+                    pages={pages}
+                    onChange={paginationOnChange}
+                />
+                {this.props.isFetching 
+                    ? <Preloader/> 
+                    : <Users
+                        users={this.props.users}
+                        onFollow={this.props.onFollow}
+                    />
+                }
+                
+            </>
         )
     }
 }
@@ -57,12 +69,14 @@ type MapStateToPropsType = {
     pageSize: number,
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 type MapDispatchToPropsType = {
     onFollow: (userId: string) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageId: number) => void
     setTotalUsersCount: (totalUsers: number) => void
+    isFetchingToggle: (isFetching: boolean) => void
 }
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -72,7 +86,8 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
@@ -88,6 +103,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setTotalUsersCount: (totalUsers) => {
             dispatch(SetTotalUsersCountAC(totalUsers))
+        },
+        isFetchingToggle: (isFetching) => {
+            dispatch(IsFetchingToggleAC(isFetching))
         }
     }
 }

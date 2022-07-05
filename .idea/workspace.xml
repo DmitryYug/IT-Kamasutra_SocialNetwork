@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e96ceb75-dc39-4fd5-a13d-3c8fff396c6d" name="Changes" comment="Reusable AddItemField added" />
+    <list default="true" id="e96ceb75-dc39-4fd5-a13d-3c8fff396c6d" name="Changes" comment="Samurai-way_56">
+      <change afterPath="$PROJECT_DIR$/src/assets/Spinner-1.2s-231px.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/PaginationComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/Preloader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Users/Users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Content/Users/UsersContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Content/Users/UsersContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +33,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/MyUiComponents/MyAddItemField" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/assets" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -33,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/components/MyUiComponents/MyAddItemField" />
       <recent name="$PROJECT_DIR$/src/components/MyUiComponents" />
     </key>
@@ -74,7 +85,8 @@
       <workItem from="1656754365260" duration="477000" />
       <workItem from="1656848862121" duration="439000" />
       <workItem from="1656881304710" duration="6000" />
-      <workItem from="1657018177604" duration="3921000" />
+      <workItem from="1657018177604" duration="6709000" />
+      <workItem from="1657025723379" duration="1084000" />
     </task>
     <task id="LOCAL-00001" summary=" Samurai-way_54">
       <created>1655057825019</created>
@@ -104,7 +116,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656452110110</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Samurai-way_56">
+      <created>1657022461724</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657022461724</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,6 +144,7 @@
     <MESSAGE value=" Samurai-way_54" />
     <MESSAGE value=" Samurai-way_55" />
     <MESSAGE value="Reusable AddItemField added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reusable AddItemField added" />
+    <MESSAGE value="Samurai-way_56" />
+    <option name="LAST_COMMIT_MESSAGE" value="Samurai-way_56" />
   </component>
 </project>

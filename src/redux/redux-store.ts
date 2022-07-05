@@ -41,6 +41,7 @@ export type UsersPageType = {
     pageSize: number,
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type RootsStateType = {
     profilePage: ProfilePageType
