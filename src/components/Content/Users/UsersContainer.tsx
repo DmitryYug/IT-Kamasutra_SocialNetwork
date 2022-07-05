@@ -4,10 +4,14 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {RootsStateType, UsersType} from "../../../redux/redux-store";
 import {
-    FollowToggleAC, IsFetchingToggleAC, SetCurrentPageAC, SetTotalUsersCountAC, SetUsersAC
+    followToggle,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    isFetchingToggle
 } from "../../../redux/users-reducer";
-import { PaginationComponent } from "../../common/PaginationComponent";
-import { Preloader } from "../../common/Preloader";
+import {PaginationComponent} from "../../common/PaginationComponent";
+import {Preloader} from "../../common/Preloader";
 import {Users} from "./Users";
 
 
@@ -51,14 +55,13 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
                     pages={pages}
                     onChange={paginationOnChange}
                 />
-                {this.props.isFetching 
-                    ? <Preloader/> 
+                {this.props.isFetching
+                    ? <Preloader/>
                     : <Users
                         users={this.props.users}
-                        onFollow={this.props.onFollow}
+                        followToggle={this.props.followToggle}
                     />
                 }
-                
             </>
         )
     }
@@ -72,7 +75,7 @@ type MapStateToPropsType = {
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
-    onFollow: (userId: string) => void
+    followToggle: (userId: string) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageId: number) => void
     setTotalUsersCount: (totalUsers: number) => void
@@ -90,23 +93,32 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        onFollow: (userId) => {
-            dispatch(FollowToggleAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(SetUsersAC(users))
-        },
-        setCurrentPage: (pageNumber) => {
-            dispatch(SetCurrentPageAC(pageNumber))
-        },
-        setTotalUsersCount: (totalUsers) => {
-            dispatch(SetTotalUsersCountAC(totalUsers))
-        },
-        isFetchingToggle: (isFetching) => {
-            dispatch(IsFetchingToggleAC(isFetching))
-        }
+// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+//     return {
+//         onFollow: (userId) => {
+//             dispatch(FollowToggleAC(userId))
+//         },
+//         setUsers: (users) => {
+//             dispatch(SetUsersAC(users))
+//         },
+//         setCurrentPage: (pageNumber) => {
+//             dispatch(SetCurrentPageAC(pageNumber))
+//         },
+//         setTotalUsersCount: (totalUsers) => {
+//             dispatch(SetTotalUsersCountAC(totalUsers))
+//         },
+//         isFetchingToggle: (isFetching) => {
+//             dispatch(IsFetchingToggleAC(isFetching))
+//         }
+//     }
+// }
+
+export const UsersContainer = connect(mapStateToProps,
+    {
+        followToggle,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        isFetchingToggle
     }
-}
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiContainer)
+    ) (UsersApiContainer)

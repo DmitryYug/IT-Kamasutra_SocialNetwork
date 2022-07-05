@@ -2,11 +2,11 @@ import {v1} from "uuid"
 import {UsersPageType, UsersType} from "./redux-store"
 
 
-type FollowToggleACType = ReturnType<typeof FollowToggleAC>
-type SetUsersACType = ReturnType<typeof SetUsersAC>
-type SetUsersPagesACType = ReturnType<typeof SetCurrentPageAC>
-type SetTotalUsersCountACType = ReturnType<typeof SetTotalUsersCountAC>
-type IsFetchingToggleACType = ReturnType<typeof IsFetchingToggleAC>
+type FollowToggleACType = ReturnType<typeof followToggle>
+type SetUsersACType = ReturnType<typeof setUsers>
+type SetUsersPagesACType = ReturnType<typeof setCurrentPage>
+type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
+type IsFetchingToggleACType = ReturnType<typeof isFetchingToggle>
 type UsersReducerTypes =
     FollowToggleACType
     | SetUsersACType
@@ -60,31 +60,31 @@ export const usersReducer =
         }
     }
 
-export const FollowToggleAC = (userId: string) => {
+export const followToggle = (userId: string) => {
     return {
         type: 'FOLLOW-TOGGLE',
         userId: userId
     } as const
 }
-export const SetUsersAC = (users: Array<UsersType>) => {
+export const setUsers = (users: Array<UsersType>) => {
     return {
         type: 'SET-USERS',
         users
     } as const
 }
-export const SetCurrentPageAC = (pageNumber: number) => {
+export const setCurrentPage = (pageNumber: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         pageNumber
     } as const
 }
-export const SetTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: 'SET-TOTAL-USERS',
         totalUsersCount
     } as const
 }
-export const IsFetchingToggleAC = (isFetching: boolean) => {
+export const isFetchingToggle = (isFetching: boolean) => {
     return {
         type: 'IS-FETCHING-TOGGLE',
         isFetching

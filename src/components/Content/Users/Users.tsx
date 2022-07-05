@@ -10,7 +10,7 @@ import {MySwitch} from '../../MyUiComponents/MySwitch/MySwitch';
 
 type UsersPropsType = {
     users: Array<UsersType>
-    onFollow: (userId: string) => void
+    followToggle: (userId: string) => void
 }
 
 export const Users = (props: UsersPropsType) => {
@@ -18,7 +18,7 @@ export const Users = (props: UsersPropsType) => {
         <div>
             {props.users.map(u => {
                     const onFollow = () => {
-                        props.onFollow(u.id)
+                        props.followToggle(u.id)
                     }
                     return (
                         <Card
