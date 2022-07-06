@@ -6,7 +6,7 @@ import {v1} from "uuid";
 import unknownUserPhoto
     from '../../../assets/437-4374952_no-avatar-male-female.png'
 import {MySwitch} from '../../MyUiComponents/MySwitch/MySwitch';
-// import { PaginationComponent } from '../../common/PaginationComponent';
+import { NavLink } from 'react-router-dom';
 
 type UsersPropsType = {
     users: Array<UsersType>
@@ -28,11 +28,13 @@ export const Users = (props: UsersPropsType) => {
                                 className={classes.item}
                                 avatar={
                                     <>
-                                        <Avatar>
-                                            <img src={u.photos.small != null
-                                                ? u.photos.small
-                                                : unknownUserPhoto}/>
-                                        </Avatar>
+                                        <NavLink to={'/profile/' + u.id}>
+                                            <Avatar>
+                                                <img src={u.photos.small != null
+                                                    ? u.photos.small
+                                                    : unknownUserPhoto}/>
+                                            </Avatar>
+                                        </NavLink>
                                     </>
                                 }
                                 title={`${u.name} Im from u.location.country, u.location.city`}

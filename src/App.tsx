@@ -6,6 +6,7 @@ import {Route} from "react-router-dom";
 import { Profile } from './components/Content/Profile/Profile';
 import { DialogsContainer } from './components/Content/Dialogs/DialogsContainer';
 import { UsersContainer } from './components/Content/Users/UsersContainer';
+import { ProfileContainer } from './components/Content/Profile/ProfileContainer';
 
 export const App = () => {
     return (
@@ -15,7 +16,7 @@ export const App = () => {
             <div className='app-wrapper-content'>
                 <Route
                     path='/profile'
-                    render={() => <Profile/>}/>
+                    render={() => <ProfileContainer/>}/>
                 <Route
                     path='/dialogs'
                     render={() => <DialogsContainer/>}

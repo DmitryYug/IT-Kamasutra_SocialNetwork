@@ -1,8 +1,28 @@
 import {combineReducers, createStore} from "redux";
-import {AddPostAC, ChangePostAC, profileReducer} from "./profile-reducer";
-import {AddMessageAC, ChangeMessageAC, dialogsReducer} from "./dialogs-reducer";
+import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
+
 import {usersReducer} from "./users-reducer";
 
+//ProfileTypes
+export type ProfileItemType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        github: string
+        instagram: string
+        mainLink: string
+        twitter: string
+        vk: string
+        website: string
+        youtube: string
+    }
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: {large: any, small: any}
+    userId: number
+}
 export type PostItemType = {
     id: string,
     message: string,
@@ -11,7 +31,9 @@ export type PostItemType = {
 export type ProfilePageType = {
     newPostText: string
     posts: Array<PostItemType>
+    profile: ProfileItemType | null
 }
+//DialogsTypes
 export type MessageItemType = {
     id: string,
     message: string
@@ -26,6 +48,7 @@ export type DialogsPageType = {
     dialogs: Array<DialogItemType>,
     messages: Array<MessageItemType>
 }
+//UsersTypes
 export type UsersType = {
     name: string,
     id: string,

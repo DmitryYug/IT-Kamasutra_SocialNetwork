@@ -10,12 +10,12 @@ import { MyAddItemField } from "../../../MyUiComponents/MyAddItemField/MyAddItem
 type MyPostsPropsType = {
     posts: Array<PostItemType>,
     newPostTitle: string,
-    addPostOnClick: () => void,
-    addPostOnChange: (currentPostText: string) => void,
+    addPost: () => void,
+    changePost: (currentPostText: string) => void,
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (
-    {addPostOnClick, addPostOnChange, posts, newPostTitle}
+    {addPost, changePost, posts, newPostTitle}
 ) => {
 
 //Elements
@@ -36,9 +36,9 @@ export const MyPosts: React.FC<MyPostsPropsType> = (
                 value={newPostTitle}
                 labelText={'type new post'}
                 errorLabelText={'should be smth'}
-                onClickCallback={addPostOnClick}
-                onChangeCallback={addPostOnChange}
-                onKeyPressCallback={addPostOnClick}
+                onClickCallback={addPost}
+                onChangeCallback={changePost}
+                onKeyPressCallback={addPost}
             />
             <div>
                 {postItems}

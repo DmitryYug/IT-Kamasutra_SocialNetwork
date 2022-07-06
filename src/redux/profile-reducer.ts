@@ -1,10 +1,32 @@
 import {v1} from "uuid";
-import {PostItemType, ProfilePageType} from "./redux-store";
+import {PostItemType, ProfileItemType, ProfilePageType} from "./redux-store";
 
 
-type AddPostACType = ReturnType<typeof AddPostAC>
-type ChangePostACType = ReturnType<typeof ChangePostAC>
-type ProfileReducerTypes = AddPostACType | ChangePostACType
+// let initialProfile: ProfileItemType  = {
+//     aboutMe: 'super star',
+//     contacts: {
+//         facebook: null,
+//         github: null,
+//         instagram: null,
+//         mainLink: null,
+//         twitter: null,
+//         vk: null,
+//         website: null,
+//         youtube: null
+//     }
+//     fullName:
+//     lookingForAJob:
+//     lookingForAJobDescription:
+//     photos: {large: any, small: any}
+//     userId:
+// }
+
+type AddPostACType = ReturnType<typeof addPost>
+type ChangePostACType = ReturnType<typeof changePost>
+type SetProfileACType = ReturnType<typeof setProfile>
+type ProfileReducerTypes = AddPostACType
+    | ChangePostACType
+    | SetProfileACType
 
 
 let initialProfilePageState: ProfilePageType = {
@@ -14,37 +36,52 @@ let initialProfilePageState: ProfilePageType = {
         {id: v1(), message: 'second post', likes: 45},
         {id: v1(), message: 'surprise mtf', likes: 12}
     ],
+    profile: null
 }
 
 export const profileReducer =
     (state = initialProfilePageState, action: ProfileReducerTypes): ProfilePageType => {
-    switch (action.type) {
-        case "ADD-POST":
-            let newPost: PostItemType = {id: v1(), message: state.newPostText, likes: 0}
-            return {
-                ...state,
-                newPostText: '',
-                posts: [newPost, ...state.posts]
-            }
-        case 'CHANGE-NEW-POST-TEXT':
-            return {
-                ...state,
-                newPostText: action.newPostValue
-            }
-        default:
-            return state
+        switch (action.type) {
+            case "ADD-POST":
+                let newPost: PostItemType = {id: v1(), message: state.newPostText, likes: 0}
+                return {
+                    ...state,
+                    newPostText: '',
+                    posts: [newPost, ...state.posts]
+                }
+            case 'CHANGE-NEW-POST-TEXT':
+                return {
+                    ...state,
+                    newPostText: action.newPostValue
+                }
+            case "SET-PROFILE":
+                if (action.profile) {
+                    return {
+                        ...state,
+                        profile: action.profile
+                    }
+                }
+                return {...state}
+            default:
+                return state
+        }
     }
-}
 
-export const AddPostAC = () => {
+export const addPost = () => {
     return {
         type: "ADD-POST"
     } as const
 }
 
-export const ChangePostAC = (currentText: string) => {
+export const changePost = (newPostValue: string) => {
     return {
         type: 'CHANGE-NEW-POST-TEXT',
-        newPostValue: currentText
+        newPostValue
+    } as const
+}
+export const setProfile = (profile: ProfileItemType) => {
+    return {
+        type: 'SET-PROFILE',
+        profile
     } as const
 }
