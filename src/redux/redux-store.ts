@@ -1,8 +1,8 @@
 import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
-
 import {usersReducer} from "./users-reducer";
+import {AuthPageType, authReducer } from "./auth-reducer";
 
 //ProfileTypes
 export type ProfileItemType = {
@@ -70,13 +70,15 @@ export type RootsStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     usersPage: UsersPageType
+    authPage: AuthPageType
 }
 
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    authPage: authReducer
 })
 
 let store = createStore(rootReducer)

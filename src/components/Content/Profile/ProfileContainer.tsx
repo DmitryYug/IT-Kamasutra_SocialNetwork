@@ -35,7 +35,6 @@ class ProfileApiContainer extends React.Component<ProfileWithRouterPropsType> {
             })
     }
     render() {
-        console.log(this.props)
         return (
             <Profile
                 // userId={this.props.userId}

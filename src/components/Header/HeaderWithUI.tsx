@@ -1,12 +1,23 @@
 import React from "react";
 import "./Header.css"
-import {AppBar, Box, Button, IconButton, Typography, Toolbar} from "@mui/material";
+import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
+import unknownUserPhoto
+    from '../../assets/437-4374952_no-avatar-male-female.png'
+import { NavLink } from "react-router-dom";
+import { HeaderApiContainerPropsType } from "./HeaderApiContainer";
 
-export function HeaderWithUI () {
+
+type HeaderPropsType = {
+    isFetching: boolean
+    userLogin: string | null
+}
+
+export const HeaderWithUI = (props: HeaderPropsType) => {
+    console.log(props)
     return (
         <Box className="header"
-             sx={{ flexGrow: 1 }}
+             sx={{flexGrow: 1}}
         >
             <AppBar position="static">
                 <Toolbar>
@@ -15,14 +26,16 @@ export function HeaderWithUI () {
                         edge="start"
                         color="inherit"
                         aria-label="menu"
-                        sx={{ mr: 2 }}
+                        sx={{mr: 2}}
                     >
-                        <ConnectWithoutContactIcon />
+                        <img src={unknownUserPhoto}/>
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Social Network
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                        {props.userLogin}
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <NavLink to={'/login'}>
+                        <Button color="inherit">Login</Button>
+                    </NavLink>
                 </Toolbar>
             </AppBar>
         </Box>

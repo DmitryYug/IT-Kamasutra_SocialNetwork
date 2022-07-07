@@ -7,11 +7,12 @@ import { Profile } from './components/Content/Profile/Profile';
 import { DialogsContainer } from './components/Content/Dialogs/DialogsContainer';
 import { UsersContainer } from './components/Content/Users/UsersContainer';
 import { ProfileContainer } from './components/Content/Profile/ProfileContainer';
+import { HeaderApiContainer, HeaderContainer } from './components/Header/HeaderApiContainer';
 
 export const App = () => {
     return (
         <div className="app-wrapper">
-            <HeaderWithUI/>
+            <HeaderContainer/>
             <NavbarWithUI/>
             <div className='app-wrapper-content'>
                 <Route
