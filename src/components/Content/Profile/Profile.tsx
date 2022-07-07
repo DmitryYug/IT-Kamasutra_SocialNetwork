@@ -6,7 +6,7 @@ import { ProfileItemType } from "../../../redux/redux-store";
 
 
 type ProfilePropsType = {
-    userId: number,
+    // userId: number,
     profile: ProfileItemType | null
 }
        
