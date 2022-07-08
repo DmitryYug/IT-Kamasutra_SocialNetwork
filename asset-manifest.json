@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/IT-Kamasutra_SocialNetwork/static/css/main.533fdc5c.css",
-    "main.js": "/IT-Kamasutra_SocialNetwork/static/js/main.901099e1.js",
+    "main.css": "/IT-Kamasutra_SocialNetwork/static/css/main.543555db.css",
+    "main.js": "/IT-Kamasutra_SocialNetwork/static/js/main.c8c94ccd.js",
     "static/media/437-4374952_no-avatar-male-female.png": "/IT-Kamasutra_SocialNetwork/static/media/437-4374952_no-avatar-male-female.bab3fa24f9f52d917e24.png",
     "static/media/Spinner-1.2s-231px.svg": "/IT-Kamasutra_SocialNetwork/static/media/Spinner-1.2s-231px.528cd585f47a20bb18f2f2948558f67e.svg",
     "index.html": "/IT-Kamasutra_SocialNetwork/index.html",
-    "main.533fdc5c.css.map": "/IT-Kamasutra_SocialNetwork/static/css/main.533fdc5c.css.map",
-    "main.901099e1.js.map": "/IT-Kamasutra_SocialNetwork/static/js/main.901099e1.js.map"
+    "main.543555db.css.map": "/IT-Kamasutra_SocialNetwork/static/css/main.543555db.css.map",
+    "main.c8c94ccd.js.map": "/IT-Kamasutra_SocialNetwork/static/js/main.c8c94ccd.js.map"
   },
   "entrypoints": [
-    "static/css/main.533fdc5c.css",
-    "static/js/main.901099e1.js"
+    "static/css/main.543555db.css",
+    "static/js/main.c8c94ccd.js"
   ]
 }
