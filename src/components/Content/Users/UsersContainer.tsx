@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {getUsersAPI} from "../../../api/api";
 import {RootsStateType} from "../../../redux/redux-store";
 import {
     followToggle,
@@ -20,33 +21,22 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
         this.props.isFetchingToggle(true)
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true,
-                headers: {'API-KEY': '196fda89-f8e8-40cc-ace3-5e6ca04b4b80'}
-            }
-        )
-            .then(response => {
+        getUsersAPI(this.props.currentPage, this.props.pageSize)
+            .then(data => {
                 this.props.isFetchingToggle(false)
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.isFetchingToggle(true)
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true,
-                headers: {'API-KEY': '196fda89-f8e8-40cc-ace3-5e6ca04b4b80'}
-            }
-        ).then(response => {
-            this.props.isFetchingToggle(false)
-            this.props.setUsers(response.data.items)
-        })
+        getUsersAPI(pageNumber, this.props.pageSize)
+            .then(data => {
+                this.props.isFetchingToggle(false)
+                this.props.setUsers(data.items)
+            })
     }
 
     render() {
@@ -110,4 +100,4 @@ export const UsersContainer = connect(mapStateToProps,
         setCurrentPage,
         setTotalUsersCount,
         isFetchingToggle
-    }) (UsersApiContainer)
+    })(UsersApiContainer)

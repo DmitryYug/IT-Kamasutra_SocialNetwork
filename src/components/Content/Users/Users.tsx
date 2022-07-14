@@ -9,6 +9,7 @@ import {MySwitch} from '../../MyUiComponents/MySwitch/MySwitch';
 import {NavLink} from 'react-router-dom';
 import {UsersType} from '../../../redux/users-reducer';
 import axios from 'axios';
+import {followAPI, unFollowAPI} from '../../../api/api';
 
 type UsersPropsType = {
     users: Array<UsersType>
@@ -20,32 +21,17 @@ export const Users = (props: UsersPropsType) => {
         <div>
             {props.users.map(u => {
                     const onFollow = (isChecked: boolean) => {
-                        console.log(isChecked)
                         let userId = u.id
                         if (isChecked) {
-                            axios.post(
-                                `https://social-network.samuraijs.com/api/1.0//follow/${userId}`, {},
-                                {
-                                    withCredentials: true,
-                                    headers: {'API-KEY': '196fda89-f8e8-40cc-ace3-5e6ca04b4b80'}
-                                }
-                            ).then(response => {
-                                if (response.data.resultCode === 0) {
+                            followAPI(userId).then(data => {
+                                if (data.resultCode === 0) {
                                     props.followToggle(u.id, true)
-                                    console.log(response.data)
                                 }
                             })
                         } else {
-                            axios.delete(
-                                `https://social-network.samuraijs.com/api/1.0//follow/${userId}`,
-                                {
-                                    withCredentials: true,
-                                    headers: {'API-KEY': '196fda89-f8e8-40cc-ace3-5e6ca04b4b80'}
-                                }
-                            ).then(response => {
-                                if (response.data.resultCode === 0) {
+                            unFollowAPI(userId).then(data => {
+                                if (data.resultCode === 0) {
                                     props.followToggle(u.id, false)
-                                    console.log(response.data)
                                 }
                             })
                         }
