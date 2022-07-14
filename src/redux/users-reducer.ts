@@ -10,6 +10,7 @@ export type UsersType = {
     }
     status: string
     followed: boolean,
+    isFollowDisabled: boolean
 }
 export type UsersPageType = {
     users: Array<UsersType>,
@@ -17,6 +18,7 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    // isFollowDisabled: boolean
 }
 
 
@@ -25,19 +27,22 @@ type SetUsersACType = ReturnType<typeof setUsers>
 type SetUsersPagesACType = ReturnType<typeof setCurrentPage>
 type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
 type IsFetchingToggleACType = ReturnType<typeof isFetchingToggle>
+type isFollowDisabledToggleACType = ReturnType<typeof isFollowDisabledToggle>
 type UsersReducerTypes =
     FollowToggleACType
     | SetUsersACType
     | SetUsersPagesACType
     | SetTotalUsersCountACType
     | IsFetchingToggleACType
+    | isFollowDisabledToggleACType
 
 let initialUsersState: UsersPageType = {
     users: [],
     totalUsersCount: 0,
     pageSize: 5,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    // isFollowDisabled: false
 }
 
 
@@ -70,8 +75,17 @@ export const usersReducer =
                 }
             case "IS-FETCHING-TOGGLE":
                 return {
-                    ...state, 
+                    ...state,
                     isFetching: action.isFetching
+                }
+            case "IS-FOLLOW-DISABLED":
+                let currUser = state.users.find(u => u.id === action.payload.userId)
+                if (currUser) {
+                    currUser.isFollowDisabled = action.payload.isFollowDisabled
+                }
+                return {
+                    ...state,
+                    users: [...state.users]
                 }
             default:
                 return state
@@ -81,7 +95,7 @@ export const usersReducer =
 export const followToggle = (userId: string, isChecked: boolean) => {
     return {
         type: 'FOLLOW-TOGGLE',
-        payload: {userId, isChecked}
+        payload: {userId, isChecked, }
     } as const
 }
 export const setUsers = (users: Array<UsersType>) => {
@@ -108,3 +122,10 @@ export const isFetchingToggle = (isFetching: boolean) => {
         isFetching
     } as const
 }
+export const isFollowDisabledToggle = (userId: string, isFollowDisabled: boolean) => {
+    return {
+        type: 'IS-FOLLOW-DISABLED', 
+        payload: {userId, isFollowDisabled}
+    } as const
+}
+

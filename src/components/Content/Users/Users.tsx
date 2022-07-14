@@ -13,25 +13,31 @@ import {followAPI, unFollowAPI} from '../../../api/api';
 
 type UsersPropsType = {
     users: Array<UsersType>
+    // isFollowDisabled: boolean
     followToggle: (userId: string, isChecked: boolean) => void
+    followDisabledToggle: (userId: string, isFollowDisabled: boolean) => void
 }
 
 export const Users = (props: UsersPropsType) => {
+    
     return (
         <div>
             {props.users.map(u => {
-                    const onFollow = (isChecked: boolean) => {
-                        let userId = u.id
+                const onFollow = (isChecked: boolean) => {
+                    props.followDisabledToggle(u.id, true)
+                        // let userId = u.id
                         if (isChecked) {
-                            followAPI(userId).then(data => {
+                            followAPI(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.followToggle(u.id, true)
+                                    props.followDisabledToggle(u.id, false)
                                 }
                             })
                         } else {
-                            unFollowAPI(userId).then(data => {
+                            unFollowAPI(u.id).then(data => {
                                 if (data.resultCode === 0) {
                                     props.followToggle(u.id, false)
+                                    props.followDisabledToggle(u.id, false)
                                 }
                             })
                         }
@@ -57,6 +63,7 @@ export const Users = (props: UsersPropsType) => {
                                 subheader={`${u.status}`}
                             />
                             <MySwitch
+                                disabled={u.isFollowDisabled}
                                 checked={u.followed}
                                 trueText='Unfollow'
                                 falseText='Follow'

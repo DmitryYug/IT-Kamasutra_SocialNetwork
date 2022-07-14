@@ -24,7 +24,7 @@ export const MySwitch: React.FC<MySwitchPropsType> = (
         console.log(event.currentTarget.checked)
         callback(event.currentTarget.checked)
     }
-
+    
     return (
         <FormGroup>
             <FormControlLabel

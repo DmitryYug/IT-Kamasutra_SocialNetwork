@@ -10,6 +10,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     isFetchingToggle,
+    isFollowDisabledToggle,
     UsersType
 } from "../../../redux/users-reducer";
 import {PaginationComponent} from "../../common/PaginationComponent";
@@ -58,7 +59,9 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
                     ? <Preloader/>
                     : <Users
                         users={this.props.users}
+                        // isFollowDisabled={this.props.isFollowDisabled}
                         followToggle={this.props.followToggle}
+                        followDisabledToggle={this.props.isFollowDisabledToggle}
                     />
                 }
             </>
@@ -72,6 +75,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    // isFollowDisabled: boolean
 }
 type MapDispatchToPropsType = {
     followToggle: (userId: string, isChecked: boolean) => void
@@ -79,8 +83,8 @@ type MapDispatchToPropsType = {
     setCurrentPage: (pageId: number) => void
     setTotalUsersCount: (totalUsers: number) => void
     isFetchingToggle: (isFetching: boolean) => void
+    isFollowDisabledToggle: (userId: string, isFollowDisabled: boolean) => void
 }
-
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
@@ -89,7 +93,8 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        // isFollowDisabled: state.usersPage.isFollowDisabled
     }
 }
 
@@ -99,5 +104,6 @@ export const UsersContainer = connect(mapStateToProps,
         setUsers,
         setCurrentPage,
         setTotalUsersCount,
-        isFetchingToggle
+        isFetchingToggle,
+        isFollowDisabledToggle
     })(UsersApiContainer)
