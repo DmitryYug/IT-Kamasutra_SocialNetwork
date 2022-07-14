@@ -6,7 +6,7 @@ type MySwitchPropsType = {
     disabled?: boolean
     trueText?: string
     falseText?: string
-    callback?: (currentState: boolean) => void
+    callback: (currentState: boolean) => void
 }
 
 export const MySwitch: React.FC<MySwitchPropsType> = (
@@ -20,10 +20,9 @@ export const MySwitch: React.FC<MySwitchPropsType> = (
 ) => {
 
 
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>, checked: boolean) => {
-        if (callback) {
-            callback(checked)
-        }
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.currentTarget.checked)
+        callback(event.currentTarget.checked)
     }
 
     return (

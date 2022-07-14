@@ -1,5 +1,23 @@
 import {v1} from "uuid"
-import {UsersPageType, UsersType} from "./redux-store"
+// import {UsersPageType, UsersType} from "./redux-store"
+
+export type UsersType = {
+    name: string,
+    id: string,
+    photos: {
+        small: string
+        large: string
+    }
+    status: string
+    followed: boolean,
+}
+export type UsersPageType = {
+    users: Array<UsersType>,
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+}
 
 
 type FollowToggleACType = ReturnType<typeof followToggle>
@@ -27,9 +45,9 @@ export const usersReducer =
     (state: UsersPageType = initialUsersState, action: UsersReducerTypes): any => {
         switch (action.type) {
             case "FOLLOW-TOGGLE":
-                let currentUser = state.users.find(user => user.id === action.userId)
+                let currentUser = state.users.find(user => user.id === action.payload.userId)
                 if (currentUser) {
-                    currentUser.followed = !currentUser.followed
+                    currentUser.followed = action.payload.isChecked
                 }
                 return {
                     ...state,
@@ -60,10 +78,10 @@ export const usersReducer =
         }
     }
 
-export const followToggle = (userId: string) => {
+export const followToggle = (userId: string, isChecked: boolean) => {
     return {
         type: 'FOLLOW-TOGGLE',
-        userId: userId
+        payload: {userId, isChecked}
     } as const
 }
 export const setUsers = (users: Array<UsersType>) => {

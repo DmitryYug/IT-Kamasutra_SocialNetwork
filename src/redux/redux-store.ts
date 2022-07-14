@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
-import {usersReducer} from "./users-reducer";
+import {UsersPageType, usersReducer} from "./users-reducer";
 import {AuthPageType, authReducer } from "./auth-reducer";
 
 //ProfileTypes
@@ -48,24 +48,7 @@ export type DialogsPageType = {
     dialogs: Array<DialogItemType>,
     messages: Array<MessageItemType>
 }
-//UsersTypes
-export type UsersType = {
-    name: string,
-    id: string,
-    photos: {
-        small: string
-        large: string
-    }
-    status: string
-    followed: boolean,
-}
-export type UsersPageType = {
-    users: Array<UsersType>,
-    pageSize: number,
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
+
 export type RootsStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

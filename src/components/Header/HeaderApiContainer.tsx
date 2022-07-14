@@ -20,7 +20,6 @@ export class HeaderApiContainer extends React.Component<HeaderApiContainerPropsT
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
             .then(response => {
                 if(response.data.resultCode === 0) {
-                    console.log(response.data.resultCode)
                     this.props.setAuthData(response.data.data)
                 }
             })

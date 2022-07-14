@@ -11,7 +11,7 @@ import { HeaderApiContainer, HeaderContainer } from './components/Header/HeaderA
 
 export const App = () => {
     return (
-        <div className="app-wrapper">
+        <div className="app-wrapper" >
             <HeaderContainer/>
             <NavbarWithUI/>
             <div className='app-wrapper-content'>

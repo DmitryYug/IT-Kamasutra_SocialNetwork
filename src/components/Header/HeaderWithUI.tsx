@@ -14,7 +14,6 @@ type HeaderPropsType = {
 }
 
 export const HeaderWithUI = (props: HeaderPropsType) => {
-    console.log(props)
     return (
         <Box className="header"
              sx={{flexGrow: 1}}
