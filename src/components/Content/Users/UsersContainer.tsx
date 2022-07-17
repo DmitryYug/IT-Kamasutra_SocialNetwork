@@ -1,17 +1,12 @@
-import axios from "axios";
 import React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {getUsersAPI} from "../../../api/api";
 import {RootsStateType} from "../../../redux/redux-store";
 import {
-    followToggle,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    isFetchingToggle,
-    isFollowDisabledToggle,
-    UsersType
+    getUsers,
+    UsersType,
+    onFollow
 } from "../../../redux/users-reducer";
 import {PaginationComponent} from "../../common/PaginationComponent";
 import {Preloader} from "../../common/Preloader";
@@ -21,23 +16,11 @@ import {Users} from "./Users";
 class UsersApiContainer extends React.Component<UsersContainerPropsType> {
 
     componentDidMount() {
-        this.props.isFetchingToggle(true)
-        getUsersAPI(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.isFetchingToggle(false)
-                this.props.setUsers(data.items)
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.isFetchingToggle(true)
-        getUsersAPI(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.isFetchingToggle(false)
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {
@@ -58,10 +41,9 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
                 {this.props.isFetching
                     ? <Preloader/>
                     : <Users
+                        isAuth={this.props.isAuth}
                         users={this.props.users}
-                        // isFollowDisabled={this.props.isFollowDisabled}
-                        followToggle={this.props.followToggle}
-                        followDisabledToggle={this.props.isFollowDisabledToggle}
+                        onFollow={this.props.onFollow}
                     />
                 }
             </>
@@ -75,15 +57,11 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    // isFollowDisabled: boolean
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    followToggle: (userId: string, isChecked: boolean) => void
-    setUsers: (users: Array<UsersType>) => void
-    setCurrentPage: (pageId: number) => void
-    setTotalUsersCount: (totalUsers: number) => void
-    isFetchingToggle: (isFetching: boolean) => void
-    isFollowDisabledToggle: (userId: string, isFollowDisabled: boolean) => void
+    onFollow: (userId: string, isChecked: boolean) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -94,16 +72,8 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        // isFollowDisabled: state.usersPage.isFollowDisabled
+        isAuth: state.authPage.isAuth
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    {
-        followToggle,
-        setUsers,
-        setCurrentPage,
-        setTotalUsersCount,
-        isFetchingToggle,
-        isFollowDisabledToggle
-    })(UsersApiContainer)
+export const UsersContainer = connect(mapStateToProps, {getUsers, onFollow})(UsersApiContainer)

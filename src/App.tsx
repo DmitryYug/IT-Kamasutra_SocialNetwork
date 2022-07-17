@@ -8,6 +8,7 @@ import { DialogsContainer } from './components/Content/Dialogs/DialogsContainer'
 import { UsersContainer } from './components/Content/Users/UsersContainer';
 import { ProfileContainer } from './components/Content/Profile/ProfileContainer';
 import { HeaderApiContainer, HeaderContainer } from './components/Header/HeaderApiContainer';
+import { Login } from './components/Login/Login';
 
 export const App = () => {
     return (
@@ -25,6 +26,10 @@ export const App = () => {
                 <Route
                     path='/users'
                     render={() => <UsersContainer/>}
+                />
+                <Route
+                    path='/login'
+                    render={() => <Login/>}
                 />
             </div>
         </div>

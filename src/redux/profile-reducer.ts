@@ -1,5 +1,9 @@
 import {v1} from "uuid";
 import {PostItemType, ProfileItemType, ProfilePageType} from "./redux-store";
+import {
+    Dispatch
+} from "../../../../../../../../Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
+import { getUserProfileAPI } from "../api/api";
 
 
 // let initialProfile: ProfileItemType  = {
@@ -72,7 +76,6 @@ export const addPost = () => {
         type: "ADD-POST"
     } as const
 }
-
 export const changePost = (newPostValue: string) => {
     return {
         type: 'CHANGE-NEW-POST-TEXT',
@@ -84,4 +87,10 @@ export const setProfile = (profile: ProfileItemType) => {
         type: 'SET-PROFILE',
         profile
     } as const
+}
+
+export const getUserProfile = (userId: string) => {
+    return (dispatch: Dispatch<SetProfileACType>) => {
+        getUserProfileAPI(userId).then(data => dispatch(setProfile(data)))
+    }
 }

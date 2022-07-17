@@ -1,3 +1,7 @@
+import {
+    Dispatch
+} from "../../../../../../../../Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
+import { authMeAPI } from "../api/api";
 
 
 export type MyLoginDataType = {
@@ -8,6 +12,7 @@ export type MyLoginDataType = {
 export type AuthPageType = {
     myLoginData: MyLoginDataType
     isFetching: boolean
+    isAuth: boolean
 }
 
 type setAuthDataACType = ReturnType<typeof setAuthData>
@@ -20,7 +25,8 @@ let initialAuthState: AuthPageType = {
         email: null,
         login: null
     },
-    isFetching: false
+    isFetching: false,
+    isAuth: false
 }
 
 
@@ -30,7 +36,8 @@ export const authReducer =
             case "SET-AUTH-DATA": 
                 return {
                     ...state,
-                    myLoginData: action.myLoginData
+                    myLoginData: action.myLoginData,
+                    isAuth: true
                 }
             default:
                 return state
@@ -43,4 +50,16 @@ export const setAuthData = (myLoginData: MyLoginDataType) => {
         type: 'SET-AUTH-DATA',
         myLoginData
     } as const
+}
+
+
+export const authMe = () => {
+    return (dispatch: Dispatch<setAuthDataACType>) => {
+        authMeAPI().then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthData(data.data))
+                }
+            }
+        )
+    }
 }

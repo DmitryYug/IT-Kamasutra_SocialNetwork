@@ -4,22 +4,23 @@ import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {Dispatch} from "redux";
 import {getUserProfileAPI} from "../../../api/api";
-import {setProfile} from "../../../redux/profile-reducer";
+import {getUserProfile, setProfile} from "../../../redux/profile-reducer";
 import {ProfileItemType, RootsStateType} from "../../../redux/redux-store";
 import {Profile} from "./Profile";
 
 
 type MapStateToPropsType = {
-    // userId: number
     profile: ProfileItemType | null
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    setProfile: (profile: ProfileItemType) => void
+    getUserProfile: (userId: string) => void
 }
-export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 type PathParamsType = {
     userId: string
 }
+export type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+
 type ProfileWithRouterPropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
 
 //Api
@@ -28,27 +29,25 @@ class ProfileApiContainer extends React.Component<ProfileWithRouterPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) userId = '2'
-        getUserProfileAPI(userId).then(data => this.props.setProfile(data))
+        this.props.getUserProfile(userId)
     }
 
     render() {
         return (
             <Profile
-                profile={this.props.profile}
-            />
+                isAuth={this.props.isAuth}
+                profile={this.props.profile}/>
         )
     }
 }
 
 //Connect
-
-
 let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
     return {
-        // userId: 10,
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.authPage.isAuth
     }
 }
 
 const ProfileWithRouter = withRouter(ProfileApiContainer)
-export const ProfileContainer = connect(mapStateToProps, {setProfile})(ProfileWithRouter)
+export const ProfileContainer = connect(mapStateToProps, {getUserProfile})(ProfileWithRouter)

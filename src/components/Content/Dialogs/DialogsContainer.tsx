@@ -7,19 +7,22 @@ import {DialogsWithUI} from "./DialogsWithUI";
 
 type MapStateToProps = {
     newMessageText: string
-    dialogs: Array<DialogItemType>,
+    dialogs: Array<DialogItemType>
     messages: Array<MessageItemType>
+    isAuth: boolean
 }
 type MapDispatchToProps = {
     addMessageOnClick: () => void
     addMessageOnChange: (newMessageValue: string) => void
 }
+export type DialogsPropsType = MapDispatchToProps & MapStateToProps
 
 let mapStateToProps = (state: RootsStateType): MapStateToProps => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText: state.dialogsPage.newMessageText
+        newMessageText: state.dialogsPage.newMessageText,
+        isAuth: state.authPage.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
@@ -32,5 +35,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         }
     }
 }
-// export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsWithUI)

@@ -7,15 +7,8 @@ import {DialogItemType, MessageItemType} from "../../../redux/redux-store";
 import {Button, TextField} from "@mui/material";
 import {MyAddItemField} from "../../MyUiComponents/MyAddItemField/MyAddItemField";
 import {v1} from "uuid";
-
-
-type DialogsPropsType = {
-    dialogs: Array<DialogItemType>
-    messages: Array<MessageItemType>
-    newMessageText: string
-    addMessageOnClick: () => void
-    addMessageOnChange: (newMessageValue: string) => void
-}
+import { DialogsPropsType } from "./DialogsContainer";
+import { Redirect } from "react-router-dom";
 
 
 export function DialogsWithUI(props: DialogsPropsType) {
@@ -27,10 +20,15 @@ export function DialogsWithUI(props: DialogsPropsType) {
         props.addMessageOnChange(newMessageValue)
     }
 
+    if (!props.isAuth) return <Redirect to={'/login'}/>
+    
 //Elements
     const dialogItems = props.dialogs.map(d => {
         return (
-            <div className={classes.dialogs_item}>
+            <div
+                key={v1()}
+                className={classes.dialogs_item}
+            >
                 {d.name}
             </div>
         )
@@ -95,24 +93,6 @@ const NewMessage: React.FC<NewMessagePropsType> = (props) => {
                 onChangeCallback={props.addMessageOnChange}
                 onKeyPressCallback={addMessageOnClickHandler}
             />
-            {/*<TextField*/}
-            {/*    sx={{*/}
-            {/*        margin: '0 0 0 20px',*/}
-            {/*        display: 'block'*/}
-            {/*    }}*/}
-            {/*    id="outlined-basic"*/}
-            {/*    label="Type your message..."*/}
-            {/*    variant="outlined"*/}
-            {/*    value={props.newMessageText}*/}
-            {/*    onChange={addMessageOnChangeHandler}*/}
-            {/*/>*/}
-            {/*<Button*/}
-            {/*    sx={{margin: '10px 0 0 20px'}}*/}
-            {/*    variant="contained"*/}
-            {/*    onClick={addMessageOnClickHandler}*/}
-            {/*>*/}
-            {/*    Send message*/}
-            {/*</Button>*/}
         </div>
     )
 }

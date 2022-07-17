@@ -1,8 +1,6 @@
-import axios from 'axios'
 import React from 'react'
 import {connect} from 'react-redux'
-import {authMeAPI} from '../../api/api'
-import {setAuthData, MyLoginDataType} from '../../redux/auth-reducer'
+import {setAuthData, MyLoginDataType, authMe} from '../../redux/auth-reducer'
 import {RootsStateType} from '../../redux/redux-store'
 import {HeaderWithUI} from './HeaderWithUI'
 
@@ -12,18 +10,13 @@ type MapStateToPropsType = {
     userLogin: string | null
 }
 type MapDispatchToPropsType = {
-    setAuthData: (myLoginData: MyLoginDataType) => void
+    authMe: () => void
 }
 
 export class HeaderApiContainer extends React.Component<HeaderApiContainerPropsType> {
 
     componentDidMount() {
-        authMeAPI().then(data => {
-                if (data.resultCode === 0) {
-                    this.props.setAuthData(data.data)
-                }
-            }
-        )
+        this.props.authMe()
     }
 
     render() {
@@ -35,7 +28,6 @@ export class HeaderApiContainer extends React.Component<HeaderApiContainerPropsT
         )
     }
 }
-
 let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
     return {
         isFetching: state.authPage.isFetching,
@@ -43,4 +35,4 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
     }
 }
 
-export const HeaderContainer = connect(mapStateToProps, {setAuthData})(HeaderApiContainer)
+export const HeaderContainer = connect(mapStateToProps, {authMe})(HeaderApiContainer)

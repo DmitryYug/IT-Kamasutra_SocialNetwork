@@ -1,5 +1,6 @@
+import { Dispatch } from "react"
 import {v1} from "uuid"
-// import {UsersPageType, UsersType} from "./redux-store"
+import {followAPI, getUsersAPI, unFollowAPI } from "../api/api"
 
 export type UsersType = {
     name: string,
@@ -127,5 +128,38 @@ export const isFollowDisabledToggle = (userId: string, isFollowDisabled: boolean
         type: 'IS-FOLLOW-DISABLED', 
         payload: {userId, isFollowDisabled}
     } as const
+}
+
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch <IsFetchingToggleACType | SetUsersACType | SetTotalUsersCountACType>) => {
+        dispatch(isFetchingToggle(true))
+        getUsersAPI(currentPage, pageSize)
+            .then(data => {
+                dispatch(isFetchingToggle(false))
+                dispatch(setUsers(data.items))
+                dispatch(setTotalUsersCount(data.totalCount))
+            })
+    }
+}
+export const onFollow = (userId: string, isChecked: boolean) => {
+    return (dispatch: Dispatch <isFollowDisabledToggleACType | FollowToggleACType>) => {
+        dispatch(isFollowDisabledToggle(userId, true))
+        if (isChecked) {
+            followAPI(userId).then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followToggle(userId, true))
+                    dispatch(isFollowDisabledToggle(userId, false))
+                }
+            })
+        } else {
+            unFollowAPI(userId).then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(followToggle(userId, false))
+                    dispatch(isFollowDisabledToggle(userId, false))
+                }
+            })
+        }
+    }
 }
 
