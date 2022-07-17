@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {getUsersAPI} from "../../../api/api";
 import {RootsStateType} from "../../../redux/redux-store";
 import {
@@ -15,11 +15,10 @@ import { WithAuthRedirect } from "../../WithAuthRedirect";
 
 
 class UsersApiContainer extends React.Component<UsersContainerPropsType> {
-
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
-
+    
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
@@ -42,7 +41,6 @@ class UsersApiContainer extends React.Component<UsersContainerPropsType> {
                 {this.props.isFetching
                     ? <Preloader/>
                     : <Users
-                        isAuth={this.props.isAuth}
                         users={this.props.users}
                         onFollow={this.props.onFollow}
                     />
@@ -58,7 +56,6 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     onFollow: (userId: string, isChecked: boolean) => void
@@ -72,10 +69,11 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isAuth: state.authPage.isAuth
+        isFetching: state.usersPage.isFetching
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {getUsers, onFollow})(UsersApiContainer)
-export const WithAuthRedirectUsersContainer = WithAuthRedirect(UsersContainer)
+export default compose(
+    connect(mapStateToProps, {getUsers, onFollow}),
+    WithAuthRedirect
+)(UsersApiContainer)

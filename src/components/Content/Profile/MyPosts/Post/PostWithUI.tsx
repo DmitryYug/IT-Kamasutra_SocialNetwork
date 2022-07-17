@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./Post.module.css";
-import {PostItemType} from "../../../../../redux/redux-store";
 import {Avatar, Card, CardContent, CardHeader, CardMedia, Typography} from "@mui/material";
 import {red} from "@mui/material/colors";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { PostItemType } from "../../../../../redux/profile-reducer";
 
 export function PostWithUI(props: PostItemType) {
     return (

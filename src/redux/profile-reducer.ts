@@ -1,10 +1,39 @@
 import {v1} from "uuid";
-import {PostItemType, ProfileItemType, ProfilePageType} from "./redux-store";
 import {
     Dispatch
 } from "../../../../../../../../Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
-import { getUserProfileAPI } from "../api/api";
+import {getUserProfileAPI} from "../api/api";
 
+//ProfileTypes
+export type ProfileItemType = {
+    aboutMe: string
+    contacts: {
+        facebook: string
+        github: string
+        instagram: string
+        mainLink: string
+        twitter: string
+        vk: string
+        website: string
+        youtube: string
+    }
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    photos: { large: any, small: any }
+    userId: number
+}
+export type PostItemType = {
+    id: string,
+    message: string,
+    likes: number
+}
+export type ProfilePageType = {
+    newPostText: string
+    newStatusText: string
+    posts: Array<PostItemType>
+    profile: ProfileItemType | null
+}
 
 // let initialProfile: ProfileItemType  = {
 //     aboutMe: 'super star',
@@ -28,13 +57,16 @@ import { getUserProfileAPI } from "../api/api";
 type AddPostACType = ReturnType<typeof addPost>
 type ChangePostACType = ReturnType<typeof changePost>
 type SetProfileACType = ReturnType<typeof setProfile>
+type SetStatusACType = ReturnType<typeof setStatus>
 type ProfileReducerTypes = AddPostACType
     | ChangePostACType
     | SetProfileACType
+    | SetStatusACType
 
 
 let initialProfilePageState: ProfilePageType = {
     newPostText: '',
+    newStatusText: 'how is your mood?',
     posts: [
         {id: v1(), message: 'first post', likes: 4},
         {id: v1(), message: 'second post', likes: 45},
@@ -66,6 +98,11 @@ export const profileReducer =
                     }
                 }
                 return {...state}
+            case "SET-STATUS":
+                return {
+                    ...state,
+                    newStatusText: action.newStatusText
+                }
             default:
                 return state
         }
@@ -88,6 +125,13 @@ export const setProfile = (profile: ProfileItemType) => {
         profile
     } as const
 }
+export const setStatus = (newStatusText: string) => {
+    return {
+        type: 'SET-STATUS',
+        newStatusText
+    } as const
+}
+
 
 export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch<SetProfileACType>) => {

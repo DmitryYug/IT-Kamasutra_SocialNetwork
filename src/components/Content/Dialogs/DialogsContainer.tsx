@@ -2,7 +2,7 @@ import React from "react";
 import {AddMessageAC, ChangeMessageAC} from "../../../redux/dialogs-reducer";
 import {DialogItemType, MessageItemType, RootsStateType} from "../../../redux/redux-store";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {DialogsWithUI} from "./DialogsWithUI";
 import { WithAuthRedirect } from "../../WithAuthRedirect";
 
@@ -10,7 +10,6 @@ type MapStateToProps = {
     newMessageText: string
     dialogs: Array<DialogItemType>
     messages: Array<MessageItemType>
-    isAuth: boolean
 }
 type MapDispatchToProps = {
     addMessageOnClick: () => void
@@ -23,7 +22,6 @@ let mapStateToProps = (state: RootsStateType): MapStateToProps => {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
         newMessageText: state.dialogsPage.newMessageText,
-        isAuth: state.authPage.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
@@ -36,5 +34,8 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
         }
     }
 }
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsWithUI)
-export const WithAuthRedirectDialogsContainer = WithAuthRedirect(DialogsContainer)
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    WithAuthRedirect
+)(DialogsWithUI)

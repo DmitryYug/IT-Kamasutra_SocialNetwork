@@ -1,16 +1,24 @@
 import React from "react";
-import {ProfileItemType} from "../../../../redux/redux-store";
 import {Preloader} from "../../../common/Preloader";
 import unknownUserPhoto
     from '../../../../assets/437-4374952_no-avatar-male-female.png'
+import MyEditableSpan from "../../../MyUiComponents/MyEditableSpan/MyEditableSpan";
+import {ProfileItemType} from "../../../../redux/profile-reducer";
+import {ProfileContainerPropsType} from "../ProfileContainer";
 
 type ProfileInfoPropsType = {
-    profile: null | ProfileItemType
+    newStatusText: string
+    setStatus: (newStatusText: string) => void
+    profile: ProfileItemType | null
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     if (!props.profile) return <Preloader/>
+
+    const setStatus = (newStatusText: string) => {
+        props.setStatus(newStatusText)
+    }
 
     return (
         <div>
@@ -20,7 +28,13 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcmzHamssh3M081NcC3AWVhzJCzG76vADS7Q&usqp=CAU"/>
             </div>
             <div>
-                <div>{props.profile.fullName}</div>
+                <h1>{props.profile.fullName}</h1>
+                <div>
+                    <MyEditableSpan
+                        label={props.newStatusText}
+                        onChangeCallback={setStatus}
+                    />
+                </div>
                 <img style={{width: '200px', height: '200px'}}
                      src={props.profile.photos.large || unknownUserPhoto}></img>
             </div>

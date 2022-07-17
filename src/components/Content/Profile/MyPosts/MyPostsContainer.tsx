@@ -1,7 +1,7 @@
 import React from "react";
-import {addPost, changePost} from "../../../../redux/profile-reducer";
+import {addPost, changePost, PostItemType} from "../../../../redux/profile-reducer";
 import {connect} from "react-redux";
-import {PostItemType, RootsStateType} from "../../../../redux/redux-store";
+import { RootsStateType} from "../../../../redux/redux-store";
 import {Dispatch} from "redux";
 import {MyPosts} from "../../../../components/Content/Profile/MyPosts/MyPosts";
 
@@ -20,15 +20,5 @@ let mapStateToProps = (state: RootsStateType): MapStateToProps => {
         newPostTitle: state.profilePage.newPostText
     }
 }
-// let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
-//     return {
-//         addPostOnClick: () => {
-//             dispatch(AddPostAC())
-//         },
-//         addPostOnChange: (currentPostText: string) => {
-//             dispatch(ChangePostAC(currentPostText))
-//         }
-//
-//     }
-// }
+
 export const MyPostsContainer = connect(mapStateToProps, {addPost, changePost})(MyPosts)

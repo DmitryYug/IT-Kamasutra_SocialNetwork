@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from "react";
 import classes from "./MyPosts.module.css";
 import {PostAddForm} from "./PostAddForm/PostAddForm";
-import {PostItemType} from "../../../../redux/redux-store";
 import {PostAddFormWithUI} from "./PostAddForm/PostAddFormWithUI";
 import {PostWithUI} from "./Post/PostWithUI";
 import { MyAddItemField } from "../../../MyUiComponents/MyAddItemField/MyAddItemField";
+import { PostItemType } from "../../../../redux/profile-reducer";
 
 
 type MyPostsPropsType = {

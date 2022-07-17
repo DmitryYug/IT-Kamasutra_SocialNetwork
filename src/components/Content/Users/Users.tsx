@@ -12,11 +12,11 @@ import {UsersType} from '../../../redux/users-reducer';
 type UsersPropsType = {
     users: Array<UsersType>
     onFollow: (userId: string, isChecked: boolean) => void
-    isAuth: boolean
+    // isAuth: boolean
 }
 
 export const Users = (props: UsersPropsType) => {
-    if (!props.isAuth) return <Redirect to={'/login'}/>
+    // if (!props.isAuth) return <Redirect to={'/login'}/>
     
     return (
         <div>

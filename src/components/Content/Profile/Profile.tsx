@@ -2,21 +2,21 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import { ProfileContainerPropsType } from "./ProfileContainer";
-import { ProfileItemType } from "../../../redux/redux-store";
 import { Redirect } from "react-router-dom";
-
+import { ProfileItemType } from "../../../redux/profile-reducer";
 
 type ProfilePropsType = {
+    newStatusText: string
+    setStatus: (newStatusText: string) => void
     profile: ProfileItemType | null
-    isAuth: boolean
 }
-       
 
 export const Profile = (props: ProfilePropsType) => {
-    if (!props.isAuth) return <Redirect to={'/login'}/>
     return(
         <div>
-            <ProfileInfo 
+            <ProfileInfo
+                newStatusText={props.newStatusText}
+                setStatus={props.setStatus}
                 profile={props.profile}
             />
             <MyPostsContainer/>
