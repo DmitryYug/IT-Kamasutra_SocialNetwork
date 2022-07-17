@@ -4,6 +4,7 @@ import {DialogItemType, MessageItemType, RootsStateType} from "../../../redux/re
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {DialogsWithUI} from "./DialogsWithUI";
+import { WithAuthRedirect } from "../../WithAuthRedirect";
 
 type MapStateToProps = {
     newMessageText: string
@@ -36,3 +37,4 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToProps => {
     }
 }
 export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(DialogsWithUI)
+export const WithAuthRedirectDialogsContainer = WithAuthRedirect(DialogsContainer)

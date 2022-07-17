@@ -11,6 +11,7 @@ import {
 import {PaginationComponent} from "../../common/PaginationComponent";
 import {Preloader} from "../../common/Preloader";
 import {Users} from "./Users";
+import { WithAuthRedirect } from "../../WithAuthRedirect";
 
 
 class UsersApiContainer extends React.Component<UsersContainerPropsType> {
@@ -77,3 +78,4 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
 }
 
 export const UsersContainer = connect(mapStateToProps, {getUsers, onFollow})(UsersApiContainer)
+export const WithAuthRedirectUsersContainer = WithAuthRedirect(UsersContainer)

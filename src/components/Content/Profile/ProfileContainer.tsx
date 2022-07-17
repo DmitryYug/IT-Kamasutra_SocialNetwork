@@ -6,6 +6,7 @@ import {Dispatch} from "redux";
 import {getUserProfileAPI} from "../../../api/api";
 import {getUserProfile, setProfile} from "../../../redux/profile-reducer";
 import {ProfileItemType, RootsStateType} from "../../../redux/redux-store";
+import { WithAuthRedirect } from "../../WithAuthRedirect";
 import {Profile} from "./Profile";
 
 
@@ -51,3 +52,4 @@ let mapStateToProps = (state: RootsStateType): MapStateToPropsType => {
 
 const ProfileWithRouter = withRouter(ProfileApiContainer)
 export const ProfileContainer = connect(mapStateToProps, {getUserProfile})(ProfileWithRouter)
+export const WithAuthRedirectProfileContainer = WithAuthRedirect(ProfileContainer)

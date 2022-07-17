@@ -4,9 +4,9 @@ import { HeaderWithUI } from './components/Header/HeaderWithUI';
 import {NavbarWithUI} from "./components/Navbar/NavbarWithUI";
 import {Route} from "react-router-dom";
 import { Profile } from './components/Content/Profile/Profile';
-import { DialogsContainer } from './components/Content/Dialogs/DialogsContainer';
-import { UsersContainer } from './components/Content/Users/UsersContainer';
-import { ProfileContainer } from './components/Content/Profile/ProfileContainer';
+import { WithAuthRedirectDialogsContainer } from './components/Content/Dialogs/DialogsContainer';
+import { UsersContainer, WithAuthRedirectUsersContainer } from './components/Content/Users/UsersContainer';
+import { ProfileContainer, WithAuthRedirectProfileContainer } from './components/Content/Profile/ProfileContainer';
 import { HeaderApiContainer, HeaderContainer } from './components/Header/HeaderApiContainer';
 import { Login } from './components/Login/Login';
 
@@ -18,14 +18,14 @@ export const App = () => {
             <div className='app-wrapper-content'>
                 <Route
                     path='/profile/:userId?'
-                    render={() => <ProfileContainer/>}/>
+                    render={() => <WithAuthRedirectProfileContainer/>}/>
                 <Route
                     path='/dialogs'
-                    render={() => <DialogsContainer/>}
+                    render={() => <WithAuthRedirectDialogsContainer/>}
                 />
                 <Route
                     path='/users'
-                    render={() => <UsersContainer/>}
+                    render={() => <WithAuthRedirectUsersContainer/>}
                 />
                 <Route
                     path='/login'

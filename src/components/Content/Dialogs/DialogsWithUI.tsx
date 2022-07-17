@@ -20,7 +20,7 @@ export function DialogsWithUI(props: DialogsPropsType) {
         props.addMessageOnChange(newMessageValue)
     }
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>
+    // if (!props.isAuth) return <Redirect to={'/login'}/>
     
 //Elements
     const dialogItems = props.dialogs.map(d => {
