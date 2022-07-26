@@ -1,7 +1,7 @@
 import axios from "axios";
 import {setAuthData} from "../redux/auth-reducer";
 
-const baseUrl = 'https://social-network.samuraijs.com/api/1.0'
+// const baseUrl = 'https://social-network.samuraijs.com/api/1.0'
 
 const instance = axios.create ({
     withCredentials: true,

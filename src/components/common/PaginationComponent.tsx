@@ -7,9 +7,11 @@ type PaginationPropsType = {
 }
 
 export const PaginationComponent = (props: PaginationPropsType) => {
+   
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         props.onChange(value)
     };
+    
     return(
         <Pagination
             count={props.pages.length}
