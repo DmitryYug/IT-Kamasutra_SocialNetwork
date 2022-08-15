@@ -1,4 +1,4 @@
-#### Project that u develop on free time
+#### Project that I develop on free time
 #### New commits
 
 ## To start project
